@@ -3,6 +3,9 @@ package com.estimote.proximity.estimote;
 import android.content.Context;
 import android.util.Log;
 
+import com.estimote.internal_plugins_api.scanning.Beacon;
+import com.estimote.internal_plugins_api.scanning.EstimoteRemoteLocation;
+import com.estimote.proximity.LeDeviceListAdapter;
 import com.estimote.proximity_sdk.api.EstimoteCloudCredentials;
 import com.estimote.proximity_sdk.api.ProximityObserver;
 import com.estimote.proximity_sdk.api.ProximityObserverBuilder;
@@ -64,7 +67,9 @@ public class ProximityContentManager {
                             }
                             String subtitle = Utils.getShortIdentifier(proximityContext.getDeviceId());
 
-                            nearbyContent.add(new ProximityContent(title, subtitle));
+                            String rssi = Utils.getShortIdentifier(proximityContext.getDeviceId());
+
+                            nearbyContent.add(new ProximityContent(title, subtitle, rssi));
                         }
 
                         proximityContentAdapter.setNearbyContent(nearbyContent);

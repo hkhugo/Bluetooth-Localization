@@ -8,17 +8,17 @@ public class ProximityContent {
 
     private String title;
     private String subtitle;
-    private String signal;
+    private String rssi;
 
-    ProximityContent(String title, String subtitle) {
+//    ProximityContent(String title, String subtitle) {
+//        this.title = title;
+//        this.subtitle = subtitle;
+//    }
+
+    ProximityContent(String title, String subtitle, String rssi) {
         this.title = title;
         this.subtitle = subtitle;
-    }
-
-    ProximityContent(String title, String subtitle, String signal) {
-        this.title = title;
-        this.subtitle = subtitle;
-        this.signal = signal;
+        this.rssi = rssi;
     }
 
     String getTitle() {
@@ -27,5 +27,9 @@ public class ProximityContent {
 
     String getSubtitle() {
         return subtitle;
+    }
+
+    String getRssi() {
+        return rssi;
     }
 }

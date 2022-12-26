@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -27,10 +28,6 @@ import com.estimote.proximity.estimote.ProximityContentAdapter;
 import com.estimote.proximity.estimote.ProximityContentManager;
 
 import java.util.List;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
-import kotlin.jvm.functions.Function1;
 
 //
 // Running into any issues? Drop us an email to: contact@estimote.com
@@ -60,15 +57,16 @@ public class MainActivity extends AppCompatActivity {
     //Home button function
     public void ClickHome(View view){
         closeDrawer(drawerLayout);
-        navigationTV.setText("Home");
-//        loadFragment(new HomeFragment());
+        navigationTV.setText("Localization");
+        loadFragment(new localizationFragment());
     }
 
-    //About us button function
-    public void ClickAboutUs(View view){
+    //Device List button function
+    public void ClickListDevice(View view){
         closeDrawer(drawerLayout);
-        navigationTV.setText("List Device");
-        loadFragment(new ListDeviceFragment());
+        Intent intent;
+        intent = new Intent(getApplicationContext(), LeDeviceListAdapter.class);
+        startActivity(intent);
     }
 
     public void ClickLogout(View view){
@@ -99,24 +97,46 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // buy and upload button
-//    public void onButtonClicked(View view) {
-//        Intent intent;
-//        switch (view.getId()) {
-//            case R.id.buy:
-//                intent = new Intent(getApplicationContext(), ItemListActivity.class);
-//                intent = new Intent(getApplicationContext(), ItemListActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.upload:
-//                intent = new Intent(getApplicationContext(), UploadActivity.class);
-//                startActivity(intent);
-//                break;
-//            default:
-//                throw new IllegalStateException("Unexpected value: " + view.getId());
-//        }
-//
-//    }
+    //
+    public void onButtonClicked(View view) {
+
+        EditText ptTx = findViewById(R.id.ptTx);
+        EditText ptx1 = findViewById(R.id.ptx1);
+        EditText ptx2 = findViewById(R.id.ptx2);
+        EditText ptx3 = findViewById(R.id.ptx3);
+        EditText pty1 = findViewById(R.id.pty1);
+        EditText pty2 = findViewById(R.id.pty2);
+        EditText pty3 = findViewById(R.id.pty3);
+        EditText ptRssi1 = findViewById(R.id.ptRSSI1);
+        EditText ptRSSI2 = findViewById(R.id.ptRSSI2);
+        EditText ptRSSI3 = findViewById(R.id.ptRSSI3);
+        EditText ptRssi = findViewById(R.id.ptRssi);
+
+        int txPower = Integer.parseInt(ptTx.getText().toString());
+        double[] result;
+        double[] x = new double[4];
+        x[1] = Integer.parseInt(ptx1.getText().toString());
+        x[2] = Integer.parseInt(ptx2.getText().toString());
+        x[3] = Integer.parseInt(ptx3.getText().toString());
+        double[] y = new double[4];
+        y[1] = Integer.parseInt(pty1.getText().toString());
+        y[2] = Integer.parseInt(pty2.getText().toString());
+        y[3] = Integer.parseInt(pty3.getText().toString());
+        double[] rssi = new double[4];
+        rssi[1] = Integer.parseInt(ptRssi1.getText().toString());
+        rssi[2] = Integer.parseInt(ptRSSI2.getText().toString());
+        rssi[3] = Integer.parseInt(ptRSSI3.getText().toString());
+
+
+        switch (view.getId()) {
+            case R.id.btSubmit:
+
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + view.getId());
+        }
+
+    }
 
 
     private void openDrawer(DrawerLayout drawerLayout) {

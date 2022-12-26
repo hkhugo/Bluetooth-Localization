@@ -37,6 +37,7 @@ public class ListDevice extends AppCompatActivity {
         GridView gridView = findViewById(R.id.gridView);
         gridView.setAdapter(proximityContentAdapter);
 
+        
 
         RequirementsWizardFactory
                 .createEstimoteRequirementsWizard()
@@ -78,6 +79,8 @@ public class ListDevice extends AppCompatActivity {
 //            }
 //        });
     }
+
+
 
     private void startProximityContentManager() {
         proximityContentManager = new ProximityContentManager(this, proximityContentAdapter, ((MyApplication) getApplication()).cloudCredentials);
