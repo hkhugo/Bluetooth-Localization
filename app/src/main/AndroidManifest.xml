@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.estimote.proximity">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.estimote.proximity"
+    android:exported="true">
 
     <application
         android:name="com.estimote.proximity.MyApplication"
@@ -8,15 +10,52 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:exported="true" >
         <activity
             android:name="com.estimote.proximity.MainActivity"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ListDevice"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <receiver
+            android:name="com.estimote.proximity_sdk.api.TriggerBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
+    <!-- Request legacy Bluetooth permissions on older devices. -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+
+    <!-- Needed only if your app looks for Bluetooth devices. If your app doesn't use Bluetooth scan results to derive physical location information, you can strongly assert that your app doesn't derive physical location. -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+
+    <!-- Needed only if your app makes the device discoverable to Bluetooth devices. -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+
+
+    <!-- Needed only if your app communicates with already-paired Bluetooth devices. -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+
+    <!-- Needed only if your app uses Bluetooth scan results to derive physical location. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
 
 </manifest>
