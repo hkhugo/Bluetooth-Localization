@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 
                 <EditText
                     android:id="@+id/ptx1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -62,7 +62,25 @@
 
                 <EditText
                     android:id="@+id/pty1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvRSSI1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="RSSI:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/ptRSSI1"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -105,7 +123,7 @@
 
                 <EditText
                     android:id="@+id/ptx2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -123,13 +141,34 @@
 
                 <EditText
                     android:id="@+id/pty2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvRSSI2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="RSSI:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/ptRSSI2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
             </LinearLayout>
+
+
 
         </LinearLayout>
 
@@ -165,7 +204,7 @@
 
                 <EditText
                     android:id="@+id/ptx3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -182,11 +221,29 @@
 
                 <EditText
                     android:id="@+id/pty3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/tvRSSI3"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="RSSI:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/ptRSSI3"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
 
             </LinearLayout>
 
@@ -290,6 +347,12 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
