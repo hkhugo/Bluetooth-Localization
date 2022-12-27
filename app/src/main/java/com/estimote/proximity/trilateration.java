@@ -2,7 +2,9 @@ package com.estimote.proximity;
 
 public class trilateration {
 
-    public static double[] calculation(double[] x, double[] y, double[] rssi, int txPower) {
+    public static double[] calculation(double[] x, double[] y, double[] rssi) {
+
+
         double[] d = { 0.0, 0.0 };
 
         double a11 = 2 * (x[1] - x[3]);

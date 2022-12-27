@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,19 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
-import com.estimote.coresdk.service.BeaconManager;
-import com.estimote.internal_plugins_api.scanning.Beacon;
-import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement;
-import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory;
-import com.estimote.proximity.estimote.ProximityContentAdapter;
-import com.estimote.proximity.estimote.ProximityContentManager;
-
-import java.util.List;
-
-//
-// Running into any issues? Drop us an email to: contact@estimote.com
-//
+import com.estimote.proximity.estimote.LeDeviceListAdapter;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -46,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationTV = findViewById(R.id.navigationTV);
         drawerLayout = findViewById(R.id.drawer_layout);
-//        loadFragment(new HomeFragment());
+        loadFragment(new localizationFragment());
     }
 
     //Menu
@@ -54,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         openDrawer(drawerLayout);
     }
 
-    //Home button function
+    //Localization function
     public void ClickHome(View view){
         closeDrawer(drawerLayout);
         navigationTV.setText("Localization");
@@ -65,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void ClickListDevice(View view){
         closeDrawer(drawerLayout);
         Intent intent;
-        intent = new Intent(getApplicationContext(), LeDeviceListAdapter.class);
+        intent = new Intent(getApplicationContext(), ListDevice.class);
         startActivity(intent);
     }
 
@@ -99,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     //
     public void onButtonClicked(View view) {
-
+        String TAG = "MyActivity";
+        Log.i(TAG, "Clicked");
         EditText ptTx = findViewById(R.id.ptTx);
         EditText ptx1 = findViewById(R.id.ptx1);
         EditText ptx2 = findViewById(R.id.ptx2);
@@ -111,9 +99,11 @@ public class MainActivity extends AppCompatActivity {
         EditText ptRSSI2 = findViewById(R.id.ptRSSI2);
         EditText ptRSSI3 = findViewById(R.id.ptRSSI3);
         EditText ptRssi = findViewById(R.id.ptRssi);
+        TextView tvResultX = findViewById(R.id.tvResultX);
+        TextView tvResultY = findViewById(R.id.tvResultY);
 
         int txPower = Integer.parseInt(ptTx.getText().toString());
-        double[] result;
+        double[] result = new double[2];
         double[] x = new double[4];
         x[1] = Integer.parseInt(ptx1.getText().toString());
         x[2] = Integer.parseInt(ptx2.getText().toString());
@@ -130,7 +120,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btSubmit:
-
+                    result = trilateration.calculation(x,y,rssi);
+                    Log.i(TAG, ("result is "+ Double.toString(result[0])));
+                    Log.i(TAG, ("result is "+ Double.toString(result[1])));
+                    tvResultX.setText(Double.toString(result[0]));
+                    tvResultY.setText(Double.toString(result[1]));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
