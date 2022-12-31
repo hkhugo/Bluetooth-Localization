@@ -260,7 +260,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tx:"
+                android:text="TxPower of the device:"
                 android:textAlignment="textEnd" />
 
             <EditText
@@ -271,21 +271,21 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/tvRssi"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RSSI:"
-                android:textAlignment="textEnd" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvRssi"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="RSSI:"-->
+<!--                android:textAlignment="textEnd" />-->
 
-            <EditText
-                android:id="@+id/ptRssi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+<!--            <EditText-->
+<!--                android:id="@+id/ptRssi"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:inputType="textPersonName" />-->
 
         </LinearLayout>
 

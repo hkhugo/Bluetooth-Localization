@@ -98,29 +98,29 @@ public class MainActivity extends AppCompatActivity {
         EditText ptRssi1 = findViewById(R.id.ptRSSI1);
         EditText ptRSSI2 = findViewById(R.id.ptRSSI2);
         EditText ptRSSI3 = findViewById(R.id.ptRSSI3);
-        EditText ptRssi = findViewById(R.id.ptRssi);
+//        EditText ptRssi = findViewById(R.id.ptRssi);
         TextView tvResultX = findViewById(R.id.tvResultX);
         TextView tvResultY = findViewById(R.id.tvResultY);
 
-        int txPower = Integer.parseInt(ptTx.getText().toString());
+        double txPower = Double.parseDouble(ptTx.getText().toString());
         double[] result = new double[2];
         double[] x = new double[4];
-        x[1] = Integer.parseInt(ptx1.getText().toString());
-        x[2] = Integer.parseInt(ptx2.getText().toString());
-        x[3] = Integer.parseInt(ptx3.getText().toString());
+        x[1] = Double.parseDouble(ptx1.getText().toString());
+        x[2] = Double.parseDouble(ptx2.getText().toString());
+        x[3] = Double.parseDouble(ptx3.getText().toString());
         double[] y = new double[4];
-        y[1] = Integer.parseInt(pty1.getText().toString());
-        y[2] = Integer.parseInt(pty2.getText().toString());
-        y[3] = Integer.parseInt(pty3.getText().toString());
+        y[1] = Double.parseDouble(pty1.getText().toString());
+        y[2] = Double.parseDouble(pty2.getText().toString());
+        y[3] = Double.parseDouble(pty3.getText().toString());
         double[] rssi = new double[4];
-        rssi[1] = Integer.parseInt(ptRssi1.getText().toString());
-        rssi[2] = Integer.parseInt(ptRSSI2.getText().toString());
-        rssi[3] = Integer.parseInt(ptRSSI3.getText().toString());
+        rssi[1] = Double.parseDouble(ptRssi1.getText().toString());
+        rssi[2] = Double.parseDouble(ptRSSI2.getText().toString());
+        rssi[3] = Double.parseDouble(ptRSSI3.getText().toString());
 
 
         switch (view.getId()) {
             case R.id.btSubmit:
-                    result = trilateration.calculation(x,y,rssi);
+                    result = trilateration.calculation(x,y,rssi, txPower);
                     Log.i(TAG, ("result is "+ Double.toString(result[0])));
                     Log.i(TAG, ("result is "+ Double.toString(result[1])));
                     tvResultX.setText(Double.toString(result[0]));
