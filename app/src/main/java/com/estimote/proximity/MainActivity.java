@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationTV = findViewById(R.id.navigationTV);
         drawerLayout = findViewById(R.id.drawer_layout);
+        navigationTV.setText("Trilateration Algorithm calculator");
         loadFragment(new localizationFragment());
     }
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     //Localization function
     public void ClickHome(View view){
         closeDrawer(drawerLayout);
-        navigationTV.setText("Localization");
+        navigationTV.setText("Trilateration Algorithm calculator");
         loadFragment(new localizationFragment());
     }
 
