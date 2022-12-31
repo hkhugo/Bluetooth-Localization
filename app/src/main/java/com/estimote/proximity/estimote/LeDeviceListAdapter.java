@@ -1,4 +1,4 @@
-package com.estimote.proximity;
+package com.estimote.proximity.estimote;
 
 import android.content.Context;
 import android.view.LayoutInflater;
