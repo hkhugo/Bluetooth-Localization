@@ -15,6 +15,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -26,6 +30,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation("androidx.drawerlayout:drawerlayout:1.1.1")
+    implementation 'com.estimote:scanning-plugin:0.25.0'
     implementation 'com.estimote:proximity-sdk:1.0.5'
     implementation 'com.estimote:mustard:0.2.1'
     implementation 'com.estimote:sdk:1.0.12'

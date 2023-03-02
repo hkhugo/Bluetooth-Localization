@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,25 +45,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Localization function
-    public void ClickHome(View view){
+    public void ClickHome(View view) {
         closeDrawer(drawerLayout);
         navigationTV.setText("Trilateration Algorithm calculator");
         loadFragment(new localizationFragment());
     }
 
     //Device List button function
-    public void ClickListDevice(View view){
+    public void ClickListDevice(View view) {
         closeDrawer(drawerLayout);
         Intent intent;
         intent = new Intent(getApplicationContext(), ListDevice.class);
         startActivity(intent);
     }
 
-    public void ClickLogout(View view){
+    public void ClickLogout(View view) {
         logout(this);
     }
 
-    public void ClickEmpty(View view){
+    public void ClickEmpty(View view) {
         closeDrawer(drawerLayout);
     }
 
@@ -121,11 +123,51 @@ public class MainActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btSubmit:
-                    result = trilateration.calculation(x,y,rssi, txPower);
-                    Log.i(TAG, ("result is "+ Double.toString(result[0])));
-                    Log.i(TAG, ("result is "+ Double.toString(result[1])));
-                    tvResultX.setText(Double.toString(result[0]));
-                    tvResultY.setText(Double.toString(result[1]));
+                FrameLayout container = findViewById(R.id.location_container);
+
+                result = trilateration.calculation(x, y, rssi, txPower);
+                Log.i(TAG, ("result is " + Double.toString(result[0])));
+                Log.i(TAG, ("result is " + Double.toString(result[1])));
+                tvResultX.setText(Double.toString(result[0]));
+                tvResultY.setText(Double.toString(result[1]));
+
+                // Get the location coordinates from the trilateration algorithm
+                double rx = result[0];
+                double ry = result[1];
+
+                // Get the dimensions of the container
+                int containerWidth = container.getWidth();
+                int containerHeight = container.getHeight();
+
+                // Find the max and min x and y values of the beacon coordinates
+                double maxX = Math.max(Math.max(x[0], x[1]), x[2]);
+                double maxY = Math.max(Math.max(y[0], y[1]), y[2]);
+                double minX = Math.min(Math.min(x[0], x[1]), x[2]);
+                double minY = Math.min(Math.min(y[0], y[1]), y[2]);
+
+                // Calculate the range of the coordinates and the scaling factor
+//                double rangeX = maxX - minX;
+//                double rangeY = maxY - minY;
+//                float scaleX = (float) containerWidth / (float) rangeX;
+//                float scaleY = (float) containerHeight / (float) rangeY;
+
+                // Calculate the scaling factor based on the range of the beacon coordinates
+                double scaleFactor = Math.min((containerWidth - 20) / (maxX - minX), (containerHeight - 20) / (maxY - minY));
+
+                // Create the LocationViews with the scaled coordinates
+                LocationView locationView = new LocationView(this, (float) ((rx - minX) * scaleFactor), (float) ((ry - minY) * scaleFactor), Color.BLACK);
+                LocationView locationView1 = new LocationView(this, (float) ((x[0] - minX) * scaleFactor) + 10, (float) ((y[0] - minY) * scaleFactor) + 10, Color.RED);
+                LocationView locationView2 = new LocationView(this, (float) ((x[1] - minX) * scaleFactor) + 10, (float) ((y[1] - minY) * scaleFactor) + 10, Color.GREEN);
+                LocationView locationView3 = new LocationView(this, (float) ((x[2] - minX) * scaleFactor) + 10, (float) ((y[2] - minY) * scaleFactor) + 10, Color.BLUE);
+
+                // Find the location_container and add the LocationView to it
+
+                container.removeAllViews();
+                container.addView(locationView);
+                container.addView(locationView1);
+                container.addView(locationView2);
+                container.addView(locationView3);
+
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
@@ -140,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void closeDrawer(DrawerLayout drawerLayout) {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -156,12 +198,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent e){
+    public boolean onKeyDown(int keyCode, KeyEvent e) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             logout(this);
             return true;
-        }
-        else
+        } else
             return super.onKeyDown(keyCode, e);
     }
 }

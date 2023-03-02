@@ -63,7 +63,6 @@ public class ProximityContentAdapter extends BaseAdapter {
 
         title.setText(content.getTitle());
         subtitle.setText(content.getSubtitle());
-        rssi.setText(content.getRssi());
 
         convertView.setBackgroundColor(Utils.getEstimoteColor(content.getTitle()));
 

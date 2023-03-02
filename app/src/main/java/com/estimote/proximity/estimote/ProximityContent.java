@@ -8,17 +8,15 @@ public class ProximityContent {
 
     private String title;
     private String subtitle;
-    private String rssi;
 
 //    ProximityContent(String title, String subtitle) {
 //        this.title = title;
 //        this.subtitle = subtitle;
 //    }
 
-    ProximityContent(String title, String subtitle, String rssi) {
+    ProximityContent(String title, String subtitle) {
         this.title = title;
         this.subtitle = subtitle;
-        this.rssi = rssi;
     }
 
     String getTitle() {
@@ -29,7 +27,4 @@ public class ProximityContent {
         return subtitle;
     }
 
-    String getRssi() {
-        return rssi;
-    }
 }

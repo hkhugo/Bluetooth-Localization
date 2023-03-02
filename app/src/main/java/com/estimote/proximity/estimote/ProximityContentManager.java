@@ -64,9 +64,7 @@ public class ProximityContentManager {
                             }
                             String subtitle = Utils.getShortIdentifier(proximityContext.getDeviceId());
 
-                            String rssi = Utils.getShortIdentifier(proximityContext.getDeviceId());
-
-                            nearbyContent.add(new ProximityContent(title, subtitle, rssi));
+                            nearbyContent.add(new ProximityContent(title, subtitle));
                         }
 
                         proximityContentAdapter.setNearbyContent(nearbyContent);
