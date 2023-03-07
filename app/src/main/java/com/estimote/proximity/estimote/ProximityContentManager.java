@@ -64,7 +64,26 @@ public class ProximityContentManager {
                             }
                             String subtitle = Utils.getShortIdentifier(proximityContext.getDeviceId());
 
-                            nearbyContent.add(new ProximityContent(title, subtitle));
+                            String rssi = Utils.getShortIdentifier(proximityContext.getDeviceId());
+
+                            int major = 0;
+                            int minor = 0;
+                            switch (title) {
+                                case "blueberry":
+                                    major = 10016;
+                                    minor = 15322;
+                                    break;
+                                case "ice":
+                                    major = 20001;
+                                    minor = 1;
+                                    break;
+                                case "coconut":
+                                    major = 30001;
+                                    minor = 3;
+                                    break;
+                            }
+                            Log.i("Beacon found", "title: " + title);
+                            nearbyContent.add(new ProximityContent(title, subtitle, rssi, major, minor));
                         }
 
                         proximityContentAdapter.setNearbyContent(nearbyContent);

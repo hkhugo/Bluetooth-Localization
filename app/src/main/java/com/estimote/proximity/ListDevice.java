@@ -3,15 +3,11 @@ package com.estimote.proximity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement;
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory;
-import com.estimote.proximity.estimote.LeDeviceListAdapter;
 import com.estimote.proximity.estimote.ProximityContentAdapter;
 import com.estimote.proximity.estimote.ProximityContentManager;
 
@@ -40,8 +36,6 @@ public class ListDevice extends AppCompatActivity {
         GridView gridView = findViewById(R.id.gridView);
         gridView.setAdapter(proximityContentAdapter);
 
-
-
         RequirementsWizardFactory
                 .createEstimoteRequirementsWizard()
                 .fulfillRequirements(this,
@@ -68,20 +62,6 @@ public class ListDevice extends AppCompatActivity {
                             }
                         });
 
-
-//        BeaconManager beaconManager = new BeaconManager(this);
-//        beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
-//            @Override
-//            public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
-//                // The result is a list of Beacon objects.
-//                for (Beacon beacon : beacons) {
-//                    // You get the UUID and the RSSI with:
-//                    beacon.getProximityUUID();
-//                    beacon.getRssi();
-//                    // Now, call your own methods to work with the values.
-//                }
-//            }
-//        });
     }
 
 
