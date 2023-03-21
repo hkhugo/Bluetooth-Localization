@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,17 +13,19 @@
         android:background="@drawable/customborder"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/location_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
 
-        </LinearLayout>
+<!--            <FrameLayout-->
+<!--                android:id="@+id/location_container"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -286,7 +289,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal|numberSigned" />
+                android:inputType="numberDecimal|numberSigned"
+                android:text="-59" />
 
 <!--            <TextView-->
 <!--                android:id="@+id/tvRssi"-->
@@ -376,6 +380,13 @@
             android:layout_height="wrap_content"
             android:onClick="onButtonClicked"
             android:text="Submit" />
+
+        <Button
+            android:id="@+id/btShowmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClicked"
+            android:text="Show Map" />
     </LinearLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</ScrollView>

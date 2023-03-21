@@ -24,6 +24,9 @@
         <activity android:name=".ListDevice"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity android:name=".Map"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <receiver
             android:name="com.estimote.proximity_sdk.api.TriggerBroadcastReceiver"
             android:enabled="true"
@@ -57,5 +60,11 @@
     <!-- Needed only if your app uses Bluetooth scan results to derive physical location. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+
 
 </manifest>
