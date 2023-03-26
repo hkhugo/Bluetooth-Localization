@@ -97,6 +97,7 @@ public class ProximityContentAdapter extends BaseAdapter {
                 for (Beacon beacon : beacons) {
                     // You get the UUID and the RSSI with:
                     Log.e("RSSI", "RSSI value: " + beacon.getRssi());
+                    Log.e("power", "power value: " + beacon.getMeasuredPower());
                     rssi.setText("RSSI: " + String.valueOf(beacon.getRssi()));
                     // Now, call your own methods to work with the values.
                 }

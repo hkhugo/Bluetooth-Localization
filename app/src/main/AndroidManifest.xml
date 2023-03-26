@@ -27,6 +27,9 @@
         <activity android:name=".Map"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity android:name=".TakeAttendance"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <receiver
             android:name="com.estimote.proximity_sdk.api.TriggerBroadcastReceiver"
             android:enabled="true"

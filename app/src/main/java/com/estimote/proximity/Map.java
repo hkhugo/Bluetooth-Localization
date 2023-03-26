@@ -169,7 +169,7 @@ public class Map extends AppCompatActivity {
                 container.addView(locationView3);
             }
             else{
-                
+
 
 
             }

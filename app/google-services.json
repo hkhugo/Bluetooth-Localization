@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "966156804531",
+    "firebase_url": "https://fypattendance-27584-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fypattendance-27584",
+    "storage_bucket": "fypattendance-27584.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966156804531:android:ce9eed03cc094b58e4ebc6",
+        "android_client_info": {
+          "package_name": "com.estimote.proximitycontent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966156804531-v48mc8ks2q3nehpdq0rb5d5t4eaj23uu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9KcYggNabd1QSvqjpYitK25CwYberHNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966156804531-v48mc8ks2q3nehpdq0rb5d5t4eaj23uu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -84,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Device List button function
+    public void ClickLogin(View view) {
+        closeDrawer(drawerLayout);
+        Intent intent;
+        intent = new Intent(getApplicationContext(), TakeAttendance.class);
+        startActivity(intent);
+    }
+
     public void ClickLogout(View view) throws Exception {
 //        logout(this);
 
