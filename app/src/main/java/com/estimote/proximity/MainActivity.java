@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beaconManager = new BeaconManager(getApplicationContext());
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
@@ -179,7 +181,10 @@ public class MainActivity extends AppCompatActivity {
         TextView tvResultX = findViewById(R.id.tvResultX);
         TextView tvResultY = findViewById(R.id.tvResultY);
 
-        double txPower = Double.parseDouble(ptTx.getText().toString());
+        double[] txPower = new double[3];
+        txPower[0] = Double.parseDouble(ptTx.getText().toString());
+        txPower[1] = Double.parseDouble(ptTx.getText().toString());
+        txPower[2] = Double.parseDouble(ptTx.getText().toString());
         double[] result = new double[2];
         double[] x = new double[3];
         x[0] = Double.parseDouble(ptx1.getText().toString());
@@ -197,14 +202,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btSubmit:
-                result = trilateration.calculation(x, y, rssi, txPower);
+                result = Trilateration.calculation(x, y, rssi, txPower);
                 tvResultX.setText(Double.toString(result[0]));
                 tvResultY.setText(Double.toString(result[1]));
                 break;
 
             case R.id.btShowmap:
                 Log.i(TAG, "clicked map now");
-                result = trilateration.calculation(x, y, rssi, txPower);
+                result = Trilateration.calculation(x, y, rssi, txPower);
                 Intent intent;
                 intent = new Intent(getApplicationContext(), Map.class);
                 intent.putExtra("result", result);

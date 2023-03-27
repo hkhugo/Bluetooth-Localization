@@ -1,6 +1,6 @@
 package com.estimote.proximity;
 
-public class trilateration {
+public class Trilateration {
 
 
     public static double getDistance(Double rssi, double txPower) {
@@ -14,12 +14,12 @@ public class trilateration {
         return Math.pow(10d, ((double) txPower - rssi) / (10 * n));
     }
 
-    public static double[] calculation(double[] x, double[] y, double[] rssi, double txpower) {
+    public static double[] calculation(double[] x, double[] y, double[] rssi, double[] txpower) {
 
         double distance[] = new double[3];
 
         for (int i = 0; i < 3; i++){
-            distance[i] = getDistance(rssi[i], txpower);
+            distance[i] = getDistance(rssi[i], txpower[i]);
         }
 
         double[] p = { 0.0, 0.0 };

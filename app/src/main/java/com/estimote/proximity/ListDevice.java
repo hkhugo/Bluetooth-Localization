@@ -32,6 +32,8 @@ public class ListDevice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_device);
 
+        Log.i("list", "Starting");
+
         proximityContentAdapter = new ProximityContentAdapter(this);
         GridView gridView = findViewById(R.id.gridView);
         gridView.setAdapter(proximityContentAdapter);
