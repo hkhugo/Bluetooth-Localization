@@ -1,6 +1,7 @@
 package com.estimote.proximity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,10 @@ import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.recognition.packets.Beacon;
 import com.estimote.coresdk.service.BeaconManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,8 +42,11 @@ public class TakeAttendance extends AppCompatActivity {
 
         EditText nameInput = findViewById(R.id.name_input);
         Button calculateButton = findViewById(R.id.calculate_button);
+        TextView tvNameMsg = findViewById(R.id.tvNameMsg);
         TextView tvSResultX = findViewById(R.id.tvSResultX);
         TextView tvSResultY = findViewById(R.id.tvSResultY);
+        TextView tvTimeMsg = findViewById(R.id.tvTimeMsg);
+        Button btMap= findViewById(R.id.btMap);
 
         double[] x = new double[3];
         double[] y = new double[3];
@@ -156,13 +164,29 @@ public class TakeAttendance extends AppCompatActivity {
                                     progressDialog.dismiss();
 
                                     // Update UI with the result
+                                    tvNameMsg.setText("Hello, " + nameInput.getText());
                                     tvSResultX.setText(Double.toString(result[0]));
                                     tvSResultY.setText(Double.toString(result[1]));
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                    String currentDateTime = dateFormat.format(new Date());
+                                    tvTimeMsg.setText("Recored time: " + currentDateTime);
                                 }
                             });
                         }
                     }
                 });
+            }
+        });
+
+        btMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Map.class);
+                intent.putExtra("result", result);
+                intent.putExtra("x", x);
+                intent.putExtra("y", y);
+                intent.putExtra("test", 1);
+                startActivityForResult(intent, 1);
             }
         });
     }

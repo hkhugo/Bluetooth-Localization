@@ -32,6 +32,17 @@
         android:visibility="gone">
 
         <EditText
+            android:id="@+id/tvNameMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal|numberSigned"
+            android:minHeight="48dp"
+            android:text="Name"
+            android:textAlignment="center"
+            android:enabled="false"/>
+
+        <EditText
             android:id="@+id/tvAttendanceMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +106,23 @@
                 android:enabled="false"
                 />
 
+
         </LinearLayout>
+        <Button
+            android:id="@+id/btMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Your Location" />
+        <EditText
+            android:id="@+id/tvTimeMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal|numberSigned"
+            android:minHeight="48dp"
+            android:text=""
+            android:textAlignment="center"
+            android:enabled="false"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"
