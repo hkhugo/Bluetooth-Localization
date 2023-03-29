@@ -76,10 +76,10 @@ public class TakeAttendance extends AppCompatActivity {
                         int minorBlueberry = 15322;
                         regionBlueberry = new BeaconRegion(regionNameBlueberry, regionUUIDBlueberry, majorBlueberry, minorBlueberry);
 
-                        String regionNameIce = "Ice";
+                        String regionNameIce = "mint";
                         UUID regionUUIDIce = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorIce = 20001;
-                        int minorIce = 1;
+                        int majorIce = 30001;
+                        int minorIce = 2;
                         regionIce = new BeaconRegion(regionNameIce, regionUUIDIce, majorIce, minorIce);
 
                         String regionNameCoconut = "Coconut";
@@ -117,29 +117,32 @@ public class TakeAttendance extends AppCompatActivity {
                             // You get the UUID and the RSSI with:
                             Log.e("RSSI", "RSSI value: " + beacon.getRssi());
                             Log.e("power", "power value: " + beacon.getMeasuredPower());
-                            // Now, call your own methods to work with the values.
 
                             // Store the position and distance of each beacon
                             switch (beacon.getMinor()) {
+
                                 case 15322:
-                                    x[0] = 1;
-                                    y[0] = 15;
+                                    //blueberry
+                                    x[0] = 400;
+                                    y[0] = 0;
                                     rssi[0] = beacon.getRssi();
                                     txPower[0] = beacon.getMeasuredPower();
                                     Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
                                     states[0] = true;
                                     break;
-                                case 1:
-                                    x[1] = 15;
-                                    y[1] = 15;
+                                case 2:
+                                    //ice
+                                    x[1] = 46;
+                                    y[1] = 532;
                                     rssi[1] = beacon.getRssi();
                                     txPower[1] = beacon.getMeasuredPower();
-                                    Log.e("RSSI", "RSSI 1 value: " + beacon.getRssi());
+                                    Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
                                     states[1] = true;
                                     break;
                                 case 3:
-                                    x[2] = 1;
-                                    y[2] = 1;
+                                    //coconut
+                                    x[2] = 835;
+                                    y[2] = 554;
                                     rssi[2] = beacon.getRssi();
                                     txPower[2] = beacon.getMeasuredPower();
                                     Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
@@ -148,7 +151,7 @@ public class TakeAttendance extends AppCompatActivity {
                             }
                         }
 
-                        Log.e("states", "states result: " + states[0] + ", " + states[1] + ", " + states[2]);
+                        Log.e("states", "states result: blueberry:" + states[0] + ", ice:" + states[1] + ", coconut:" + states[2]);
 
                         // Calculate the trilateration and store the result in the result array
                         if (states[0] != false && states[1] != false && states[2] != false) {

@@ -1,5 +1,7 @@
 package com.estimote.proximity;
 
+import android.util.Log;
+
 public class Trilateration {
 
 
@@ -20,6 +22,7 @@ public class Trilateration {
 
         for (int i = 0; i < 3; i++){
             distance[i] = getDistance(rssi[i], txpower[i]);
+            Log.i("distance ", (String.valueOf(i) + " " + String.valueOf(distance[i] )));
         }
 
         double[] p = { 0.0, 0.0 };
@@ -28,15 +31,15 @@ public class Trilateration {
 
         double a12 = 2 * (y[0] - y[2]);
 
-        double b1 = Math.pow(x[0], 2) - Math.pow(x[2], 2) + Math.pow(y[0], 2) - Math.pow(y[2], 2) + Math.pow(rssi[2], 2)
-                - Math.pow(rssi[0], 2);
+        double b1 = Math.pow(x[0], 2) - Math.pow(x[2], 2) + Math.pow(y[0], 2) - Math.pow(y[2], 2) + Math.pow(distance[2], 2)
+                - Math.pow(distance[0], 2);
 
         double a21 = 2 * (x[1] - x[2]);
 
         double a22 = 2 * (y[1] - y[2]);
 
-        double b2 = Math.pow(x[1], 2) - Math.pow(x[2], 2) + Math.pow(y[1], 2) - Math.pow(y[2], 2) + Math.pow(rssi[2], 2)
-                - Math.pow(rssi[1], 2);
+        double b2 = Math.pow(x[1], 2) - Math.pow(x[2], 2) + Math.pow(y[1], 2) - Math.pow(y[2], 2) + Math.pow(distance[2], 2)
+                - Math.pow(distance[1], 2);
 
         p[0] = (b1 * a22 - a12 * b2) / (a11 * a22 - a12 * a21);
 
