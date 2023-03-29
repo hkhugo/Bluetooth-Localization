@@ -13,20 +13,6 @@
         android:background="@drawable/customborder"
         android:orientation="vertical">
 
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <FrameLayout-->
-<!--                android:id="@+id/location_container"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content" />-->
-
-
-<!--        </LinearLayout>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,11 +24,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:minHeight="48dp"
                 android:text="Beacon 1:"
                 android:textAlignment="center"
-                android:textSize="24sp"
-                android:enabled="false"/>
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,8 +88,33 @@
                     android:ems="10"
                     android:inputType="numberDecimal|numberSigned"
                     android:minHeight="48dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customborder"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTx1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TxPower of the Beacon:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/ptTx1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:text="" />
 
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -118,11 +129,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:minHeight="48dp"
                 android:text="Beacon 2:"
                 android:textAlignment="center"
-                android:textSize="24sp"
-                android:enabled="false"/>
+                android:textSize="24sp" />
 
 
             <LinearLayout
@@ -186,7 +197,30 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customborder"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvTx2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TxPower of the Beacon:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/ptTx2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:text="" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -200,11 +234,11 @@
                 android:id="@+id/tvP3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:minHeight="48dp"
                 android:text="Beacon 3:"
                 android:textAlignment="center"
-                android:textSize="24sp"
-                android:enabled="false"/>
+                android:textSize="24sp" />
 
 
             <LinearLayout
@@ -244,8 +278,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
-                    />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:id="@+id/tvRSSI3"
@@ -267,47 +300,30 @@
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/customborder"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvTx"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TxPower of the Beacon:"
-                android:textAlignment="textEnd" />
+                android:background="@drawable/customborder"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/ptTx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberDecimal|numberSigned"
-                android:text="-59" />
+                <TextView
+                    android:id="@+id/tvTx3"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TxPower of the Beacon:"
+                    android:textAlignment="textEnd" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvRssi"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="RSSI:"-->
-<!--                android:textAlignment="textEnd" />-->
+                <EditText
+                    android:id="@+id/ptTx3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:text="" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/ptRssi"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:ems="10"-->
-<!--                android:inputType="numberDecimal|numberSigned" />-->
-
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -321,11 +337,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:inputType="numberDecimal|numberSigned"
                 android:minHeight="48dp"
                 android:text="Result:"
-                android:textAlignment="center"
-                android:enabled="false"/>
+                android:textAlignment="center" />
 
 
             <LinearLayout
@@ -348,8 +364,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal|numberSigned"
                     android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned"
                     android:minHeight="48dp" />
 
                 <TextView
@@ -366,9 +382,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal|numberSigned"
                     android:enabled="false"
-                    />
+                    android:inputType="numberDecimal|numberSigned" />
 
             </LinearLayout>
 

@@ -168,7 +168,9 @@ public class MainActivity extends AppCompatActivity {
     public void onButtonClicked(View view) {
         String TAG = "MyActivity";
         Log.i(TAG, "Clicked calculate");
-        EditText ptTx = findViewById(R.id.ptTx);
+        EditText ptTx1 = findViewById(R.id.ptTx1);
+        EditText ptTx2 = findViewById(R.id.ptTx2);
+        EditText ptTx3 = findViewById(R.id.ptTx3);
         EditText ptx1 = findViewById(R.id.ptx1);
         EditText ptx2 = findViewById(R.id.ptx2);
         EditText ptx3 = findViewById(R.id.ptx3);
@@ -182,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tvResultY = findViewById(R.id.tvResultY);
 
         double[] txPower = new double[3];
-        txPower[0] = Double.parseDouble(ptTx.getText().toString());
-        txPower[1] = Double.parseDouble(ptTx.getText().toString());
-        txPower[2] = Double.parseDouble(ptTx.getText().toString());
+        txPower[0] = Double.parseDouble(ptTx1.getText().toString());
+        txPower[1] = Double.parseDouble(ptTx2.getText().toString());
+        txPower[2] = Double.parseDouble(ptTx3.getText().toString());
         double[] result = new double[2];
         double[] x = new double[3];
         x[0] = Double.parseDouble(ptx1.getText().toString());
