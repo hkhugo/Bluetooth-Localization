@@ -138,8 +138,6 @@ public class Map extends AppCompatActivity {
                 maxY = Math.max(ry, Math.max(Math.max(y[0], y[1]), y[2]));
                 minX = Math.min(rx, Math.min(Math.min(x[0], x[1]), x[2]));
                 minY = Math.min(ry, Math.min(Math.min(y[0], y[1]), y[2]));
-//                minX = 0;
-//                minY = 0;
 
                 // Calculate the range of the coordinates and the scaling factor
                 rangeX = maxX - minX;
@@ -176,30 +174,7 @@ public class Map extends AppCompatActivity {
                         (float) (((x[2] - minX) * scaleX + padding) * 0.9),
                         (float) (((y[2] - minY) * scaleY + padding) * 0.9),
                         Color.BLUE,
-                        " Beacon 2: (" + x[2] + ", " + y[2] + ")",
-                        16);
-
-                // Create a LocationView object for center's location
-                LocationView center = new LocationView(this,
-                        (float) (((0 - minX) * scaleX + padding) * 0.9),
-                        (float) (((0 - minY) * scaleY + padding) * 0.9),
-                        Color.BLUE,
-                        " center device: (" + 0 + ", " + 0 + ")",
-                        16);
-
-                // Create a LocationView object for center's location
-                LocationView xTop = new LocationView(this,
-                        (float) (((10 - minX) * scaleX + padding) * 0.9),
-                        (float) (((0 - minY) * scaleY + padding) * 0.9),
-                        Color.BLUE,
-                        " xTop device: (" + 10 + ", " + 0 + ")",
-                        16);
-                // Create a LocationView object for center's location
-                LocationView yTop = new LocationView(this,
-                        (float) (((0 - minX) * scaleX + padding) * 0.9),
-                        (float) (((10 - minY) * scaleY + padding) * 0.9),
-                        Color.BLUE,
-                        " yTop device: (" + 0 + ", " + 10 + ")",
+                        " Beacon 3: (" + x[2] + ", " + y[2] + ")",
                         16);
 
                 // Find the location_container and add the LocationView to it
