@@ -28,6 +28,9 @@ android {
         noCompress "tflite"
         noCompress "lite"
     }
+    buildFeatures {
+        mlModelBinding true
+    }
 
 }
 
@@ -39,6 +42,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:32.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:32.0.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.4.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -57,10 +61,10 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
 
-
+    implementation 'org.apache.commons:commons-math3:3.6.1'
 
     // Tensorflow lite dependencies
-//    implementation 'org.tensorflow:tensorflow-lite:2.8.0'
-//    implementation 'org.tensorflow:tensorflow-lite-gpu:2.8.0'
-//    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite:2.11.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.11.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.4.3'
 }
