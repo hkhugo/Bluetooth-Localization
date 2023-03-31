@@ -67,7 +67,7 @@
         android:orientation="horizontal"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        tools:context=".ListDevice">
+        tools:context=".deviceList.ListDevice">
 
         <ImageView
             android:layout_width="wrap_content"

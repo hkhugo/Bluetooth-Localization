@@ -26,11 +26,9 @@ import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.proximity.algorithms.Trilateration;
+import com.estimote.proximity.deviceList.ListDevice;
 import com.estimote.proximity.map.Map;
 import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 //import org.tensorflow.lite.DataType;
 //import org.tensorflow.lite.Interpreter;

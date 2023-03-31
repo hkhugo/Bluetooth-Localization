@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListDevice"
+        <activity android:name=".deviceList.ListDevice"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity android:name=".map.Map"

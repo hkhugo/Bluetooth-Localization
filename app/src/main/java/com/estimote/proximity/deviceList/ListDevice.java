@@ -1,4 +1,4 @@
-package com.estimote.proximity;
+package com.estimote.proximity.deviceList;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement;
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory;
+import com.estimote.proximity.MyApplication;
+import com.estimote.proximity.R;
 import com.estimote.proximity.estimote.ProximityContentAdapter;
 import com.estimote.proximity.estimote.ProximityContentManager;
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,20 +49,26 @@ public class TakeAttendance extends AppCompatActivity {
         TextView tvTimeMsg = findViewById(R.id.tvTimeMsg);
         Button btMap = findViewById(R.id.btMap);
 
-        double[] x = new double[3];
-        double[] y = new double[3];
-        double[] rssi = new double[3];
-        int[] recordTime = {0,0,0};
-        double[] txPower = new double[3];
-        boolean[] states = new boolean[3];
+        double[] x = new double[4];
+        double[] y = new double[4];
+        double[] rssi = new double[4];
+        double[] recordedRssi = new double[4];
+        int[] recordTime = {0, 0, 0};
+        double[] txPower = new double[4];
+        double[] recordedTxpower = new double[4];
+        boolean[] states = new boolean[4];
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Capture the start time
+                final long startTime = System.currentTimeMillis();
+
                 LinearLayout login_layout = findViewById(R.id.login_layout);
                 login_layout.setVisibility(View.VISIBLE);
 
                 String name = nameInput.getText().toString();
+
                 // Show loading indicator
                 ProgressDialog progressDialog = ProgressDialog.show(TakeAttendance.this, "Calculating", "Please wait...", true);
 
@@ -69,7 +76,6 @@ public class TakeAttendance extends AppCompatActivity {
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
-
                         // Define the regions to search for the beacons
                         String regionNameBlueberry = "Blueberry";
                         UUID regionUUIDBlueberry = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
@@ -98,10 +104,10 @@ public class TakeAttendance extends AppCompatActivity {
                         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
                             @Override
                             public void onServiceReady() {
+                                beaconManager.startRanging(regionIce);
                                 beaconManager.startRanging(regionBlueberry);
                                 beaconManager.startRanging(regionMint);
                                 beaconManager.startRanging(regionCoconut);
-                                beaconManager.startRanging(regionIce);
                             }
                         });
                         return null;
@@ -109,10 +115,8 @@ public class TakeAttendance extends AppCompatActivity {
 
 
                     protected void onPostExecute(double[] position) {
-                        // Do nothing here
                     }
                 }.execute();
-
 
                 beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
                     @Override
@@ -132,10 +136,9 @@ public class TakeAttendance extends AppCompatActivity {
                                     y[0] = 0;
                                     if (recordTime[0] >= 3) {
                                         states[0] = true;
-                                    }
-                                    else {
-                                        rssi[0] = rssi[0] + beacon.getRssi();
-                                        txPower[0] = txPower[0] + beacon.getMeasuredPower();
+                                    } else {
+                                        recordedRssi[0] = recordedRssi[0] + beacon.getRssi();
+                                        recordedTxpower[0] = recordedTxpower[0] + beacon.getMeasuredPower();
                                         Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
                                         recordTime[0]++;
                                     }
@@ -146,10 +149,9 @@ public class TakeAttendance extends AppCompatActivity {
                                     y[1] = 532;
                                     if (recordTime[1] >= 3) {
                                         states[1] = true;
-                                    }
-                                    else {
-                                        rssi[1] = rssi[1] + beacon.getRssi();
-                                        txPower[1] = txPower[0] + beacon.getMeasuredPower();
+                                    } else {
+                                        recordedRssi[1] = recordedRssi[1] + beacon.getRssi();
+                                        recordedTxpower[1] = recordedTxpower[0] + beacon.getMeasuredPower();
                                         Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
                                         recordTime[1]++;
                                     }
@@ -160,27 +162,38 @@ public class TakeAttendance extends AppCompatActivity {
                                     y[2] = 554;
                                     if (recordTime[2] >= 3) {
                                         states[2] = true;
-                                    }
-                                    else {
-                                        rssi[2] = rssi[2] + beacon.getRssi();
-                                        txPower[2] = txPower[2] + beacon.getMeasuredPower();
+                                    } else {
+                                        recordedRssi[2] = recordedRssi[2] + beacon.getRssi();
+                                        recordedTxpower[2] = recordedTxpower[2] + beacon.getMeasuredPower();
                                         Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
                                         recordTime[2]++;
+                                    }
+                                    break;
+
+                                case 1:
+                                    //coconut
+                                    x[3] = 835;
+                                    y[3] = 554;
+                                    if (recordTime[3] >= 3) {
+                                        states[3] = true;
+                                    } else {
+                                        recordedRssi[3] = recordedRssi[3] + beacon.getRssi();
+                                        recordedTxpower[3] = recordedTxpower[3] + beacon.getMeasuredPower();
+                                        Log.e("RSSI", "RSSI 1 value: " + beacon.getRssi());
+                                        recordTime[3]++;
                                     }
                                     break;
                             }
                         }
 
-                        Log.e("states", "states result: blueberry:" + states[0] + ", ice:" + states[1] + ", coconut:" + states[2]);
+                        Log.e("states", "states result: blueberry:" + states[0] + ", mint:" + states[1] + ", coconut:" + states[2]);
 
                         // Calculate the trilateration and store the result in the result array
                         if (states[0] != false && states[1] != false && states[2] != false) {
                             for (int j = 0; j < 3; j++) {
-                                rssi[j] = rssi[j] / recordTime[j];
-                                rssi[j] = rssi[j] / recordTime[j];
+                                rssi[j] = recordedRssi[j] / recordTime[j];
+                                txPower[j] = recordedTxpower[j] / recordTime[j];
                                 Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
-                                states[j] = false;
-                                recordTime[j] = 0;
                             }
                             trilateration = new Trilateration();
                             result = trilateration.calculation(x, y, rssi, txPower);
@@ -190,8 +203,6 @@ public class TakeAttendance extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // Dismiss loading indicator
-                                    progressDialog.dismiss();
 
                                     // Update UI with the result
                                     tvNameMsg.setText("Hello, " + nameInput.getText());
@@ -200,6 +211,13 @@ public class TakeAttendance extends AppCompatActivity {
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                                     String currentDateTime = dateFormat.format(new Date());
                                     tvTimeMsg.setText("Recored time: " + currentDateTime);
+
+                                    long elapsedTime = System.currentTimeMillis() - startTime;
+
+                                    // Update the UI with the elapsed time
+                                    Toast.makeText(TakeAttendance.this, "Calculations completed in " + elapsedTime + " ms", Toast.LENGTH_SHORT).show();
+                                    // Hide the loading indicator
+                                    progressDialog.dismiss();
                                 }
                             });
                         }

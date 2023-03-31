@@ -1,4 +1,4 @@
-package com.estimote.proximity;
+package com.estimote.proximity.map;
 
 import android.content.Context;
 import android.util.AttributeSet;
