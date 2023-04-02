@@ -131,6 +131,14 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btCNNOwnDataResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onButtonClicked"
+            android:text="Adjust position \n by AI" />
+
+        <Button
             android:id="@+id/btMap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
