@@ -46,21 +46,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="numberDecimal|numberSigned"
             android:minHeight="48dp"
             android:text="You have taken attendance"
-            android:textAlignment="center"
-            android:enabled="false"/>
+            android:textAlignment="center" />
+
         <EditText
             android:id="@+id/tvAttendanceResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="numberDecimal|numberSigned"
             android:minHeight="48dp"
             android:text="Your position:"
-            android:textAlignment="center"
-            android:enabled="false"/>
+            android:textAlignment="center" />
 
 
         <LinearLayout
@@ -83,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal|numberSigned"
                 android:enabled="false"
+                android:inputType="numberDecimal|numberSigned"
                 android:minHeight="48dp" />
 
             <TextView
@@ -101,27 +102,50 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal|numberSigned"
                 android:enabled="false"
-                />
+                android:inputType="numberDecimal|numberSigned" />
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt4Beacon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onButtonClicked"
+                android:text="Adjust position \n by 4 beacon" />
+
+            <Button
+                android:id="@+id/btCNN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onButtonClicked"
+                android:text="Adjust position \n by AI" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/btMap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Show Your Location" />
+
         <EditText
             android:id="@+id/tvTimeMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="numberDecimal|numberSigned"
             android:minHeight="48dp"
             android:text=""
-            android:textAlignment="center"
-            android:enabled="false"/>
+            android:textAlignment="center" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
