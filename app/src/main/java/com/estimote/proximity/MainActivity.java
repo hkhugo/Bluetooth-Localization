@@ -28,7 +28,9 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.proximity.algorithms.Trilateration;
 import com.estimote.proximity.deviceList.ListDevice;
 import com.estimote.proximity.map.Map;
+import com.estimote.proximity.ml.BeaconLocalizationModel3gateways;
 import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
+import com.estimote.proximity.tensorFlowLite.BeaconLocalizer3Beacon;
 
 //import org.tensorflow.lite.DataType;
 //import org.tensorflow.lite.Interpreter;
@@ -66,11 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigationTV = findViewById(R.id.navigationTV);
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationTV.setText("Trilateration Algorithm calculator");
-
+        navigationTV.setText("Algorithm calculator");
         loadFragment(new localizationFragment());
-
-
     }
 
     //Menu
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     //Localization function
     public void ClickHome(View view) {
         closeDrawer(drawerLayout);
-        navigationTV.setText("Trilateration Algorithm calculator");
+        navigationTV.setText("Algorithm calculator");
         loadFragment(new localizationFragment());
     }
 
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Device List button function
+    //Device Take attendance button function
     public void ClickLogin(View view) {
         closeDrawer(drawerLayout);
         Intent intent;
@@ -103,8 +102,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClickLogout(View view) throws Exception {
 //        logout(this);
+        //testing purpose
         BeaconLocalizer beaconLocalizer = new BeaconLocalizer(this);
         beaconLocalizer.comparison(this);
+        BeaconLocalizer3Beacon BeaconLocalizationModel3gateways = new BeaconLocalizer3Beacon();
+        BeaconLocalizationModel3gateways.comparison(this);
     }
 
     public void ClickEmpty(View view) {
