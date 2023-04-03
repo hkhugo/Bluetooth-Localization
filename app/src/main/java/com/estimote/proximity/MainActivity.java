@@ -28,9 +28,9 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.proximity.algorithms.Trilateration;
 import com.estimote.proximity.deviceList.ListDevice;
 import com.estimote.proximity.map.Map;
-import com.estimote.proximity.ml.BeaconLocalizationModel3gateways;
+import com.estimote.proximity.tensorFlowLite.BeaconCNN;
+import com.estimote.proximity.tensorFlowLite.BeaconFFNN;
 import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
-import com.estimote.proximity.tensorFlowLite.BeaconLocalizer3Beacon;
 
 //import org.tensorflow.lite.DataType;
 //import org.tensorflow.lite.Interpreter;
@@ -103,10 +103,14 @@ public class MainActivity extends AppCompatActivity {
     public void ClickLogout(View view) throws Exception {
 //        logout(this);
         //testing purpose
-        BeaconLocalizer beaconLocalizer = new BeaconLocalizer(this);
-        beaconLocalizer.comparison(this);
-        BeaconLocalizer3Beacon BeaconLocalizationModel3gateways = new BeaconLocalizer3Beacon();
-        BeaconLocalizationModel3gateways.comparison(this);
+//        BeaconLocalizer beaconLocalizer = new BeaconLocalizer(this);
+//        beaconLocalizer.comparison(this);
+//        BeaconLocalizer3Beacon BeaconLocalizationModel3gateways = new BeaconLocalizer3Beacon();
+//        BeaconLocalizationModel3gateways.comparison(this);
+//        BeaconCNN beaconCNN = new BeaconCNN(this);
+//        beaconCNN.comparison(this);
+        BeaconFFNN beaconFFNN = new BeaconFFNN(this);
+        beaconFFNN.comparison(this);
     }
 
     public void ClickEmpty(View view) {

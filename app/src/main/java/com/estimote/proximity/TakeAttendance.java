@@ -20,6 +20,7 @@ import com.estimote.coresdk.recognition.packets.Beacon;
 import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.proximity.algorithms.Trilateration;
 import com.estimote.proximity.map.Map;
+import com.estimote.proximity.tensorFlowLite.BeaconCNN;
 import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
 
 import java.io.IOException;
@@ -188,8 +189,6 @@ public class TakeAttendance extends AppCompatActivity {
 
                                     case 1:
                                     //ice
-                                    y[3] = 360;
-                                    y[3] = 824;
                                     if (recordTime[3] >= limitedRecordTime) {
                                         states[3] = true;
                                     } else {
@@ -233,13 +232,13 @@ public class TakeAttendance extends AppCompatActivity {
                             tvSResult4BY.setText(Double.toString(position[1]));
 
                             //cal CNN
-                            BeaconLocalizer beaconLocalizer = null;
+                            BeaconCNN beaconCNN = null;
                             try {
-                                beaconLocalizer = new BeaconLocalizer(TakeAttendance.this);
+                                beaconCNN = new BeaconCNN(TakeAttendance.this);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            position = beaconLocalizer.calculatePosition(rssi);
+                            position = beaconCNN.calculatePosition(rssi);
                             Log.e("Location", "Location result(CNN with 3 beacon RSSI): " + position[0] + ", " + position[1]);
                             tvSResultCNNX.setText(Double.toString(position[0]));
                             tvSResultCNNY.setText(Double.toString(position[1]));
