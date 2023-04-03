@@ -33,7 +33,6 @@ public class TakeAttendance extends AppCompatActivity {
     private BeaconRegion regionBlueberry, regionMint, regionCoconut, regionIce;
     private Trilateration trilateration;
     double[] position = new double[2];
-    int maptype;
 
     String tag = "login";
 
@@ -49,16 +48,30 @@ public class TakeAttendance extends AppCompatActivity {
 
         EditText nameInput = findViewById(R.id.name_input);
         Button calculateButton = findViewById(R.id.calculate_button);
-        Button bt4Beacon = findViewById(R.id.bt4Beacon);
-        Button btCNN = findViewById(R.id.btCNN);
+//        Button bt4Beacon = findViewById(R.id.bt4Beacon);
+//        Button btCNN = findViewById(R.id.btCNN);
         TextView tvNameMsg = findViewById(R.id.tvNameMsg);
         TextView tvSResultX = findViewById(R.id.tvSResultX);
         TextView tvSResultY = findViewById(R.id.tvSResultY);
+        TextView tvSResult4BX = findViewById(R.id.tvSResult4BX);
+        TextView tvSResult4BY = findViewById(R.id.tvSResult4BY);
+        TextView tvSResultCNNX = findViewById(R.id.tvSResultCNNX);
+        TextView tvSResultCNNY = findViewById(R.id.tvSResultCNNY);
         TextView tvTimeMsg = findViewById(R.id.tvTimeMsg);
         Button btMap = findViewById(R.id.btMap);
+        Button btMap4B = findViewById(R.id.btMap4B);
+        Button btMapCNN = findViewById(R.id.btMapCNN);
 
         double[] x = new double[4];
+        x[0] = 520;
+        x[1] = 0;
+        x[2] = 770;
+        x[3] = 265;
         double[] y = new double[4];
+        y[0] = 0;
+        y[1] = 370;
+        y[2] = 550;
+        y[3] = 750;
         double[] rssi = new double[4];
         double[] recordedRssi = new double[4];
         int[] recordTime = {0, 0, 0,0};
@@ -70,155 +83,6 @@ public class TakeAttendance extends AppCompatActivity {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                maptype = 1;
-                // Capture the start time
-                final long startTime = System.currentTimeMillis();
-
-                LinearLayout login_layout = findViewById(R.id.login_layout);
-                login_layout.setVisibility(View.VISIBLE);
-
-                String name = nameInput.getText().toString();
-
-                // Show loading indicator
-                ProgressDialog progressDialog = ProgressDialog.show(TakeAttendance.this, "Calculating", "Please wait...", true);
-
-                // Run calculation on a background thread
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        // Define the regions to search for the beacons
-                        String regionNameBlueberry = "Blueberry";
-                        UUID regionUUIDBlueberry = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorBlueberry = 10016;
-                        int minorBlueberry = 15322;
-                        regionBlueberry = new BeaconRegion(regionNameBlueberry, regionUUIDBlueberry, majorBlueberry, minorBlueberry);
-
-                        String regionNameMint = "mint";
-                        UUID regionUUIDMint = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorMint = 30001;
-                        int minorMint = 2;
-                        regionMint = new BeaconRegion(regionNameMint, regionUUIDMint, majorMint, minorMint);
-
-                        String regionNameCoconut = "Coconut";
-                        UUID regionUUIDCoconut = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorCoconut = 30001;
-                        int minorCoconut = 3;
-                        regionCoconut = new BeaconRegion(regionNameCoconut, regionUUIDCoconut, majorCoconut, minorCoconut);
-
-                        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-                            @Override
-                            public void onServiceReady() {
-                                beaconManager.startRanging(regionBlueberry);
-                                beaconManager.startRanging(regionMint);
-                                beaconManager.startRanging(regionCoconut);
-                            }
-                        });
-                        return null;
-                    }
-
-
-                    protected void onPostExecute() {
-                    }
-                }.execute();
-
-                beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
-                    @Override
-                    public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
-                        Log.i("Beacon", "Start listen!");
-                        // The result is a list of Beacon objects.
-                        int i = 0;
-
-                        for (Beacon beacon : beacons) {
-
-                            // Store the position and distance of each beacon
-                            switch (beacon.getMinor()) {
-
-                                case 15322:
-                                    //blueberry
-                                    x[0] = 400;
-                                    y[0] = 0;
-                                    if (recordTime[0] >= limitedRecordTime) {
-                                        states[0] = true;
-                                    } else {
-                                        recordedRssi[0] = recordedRssi[0] + beacon.getRssi();
-                                        recordedTxpower[0] = recordedTxpower[0] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
-                                        recordTime[0]++;
-                                    }
-                                    break;
-                                case 2:
-                                    //ice
-                                    x[1] = 46;
-                                    y[1] = 532;
-                                    if (recordTime[1] >= limitedRecordTime) {
-                                        states[1] = true;
-                                    } else {
-                                        recordedRssi[1] = recordedRssi[1] + beacon.getRssi();
-                                        recordedTxpower[1] = recordedTxpower[0] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
-                                        recordTime[1]++;
-                                    }
-                                    break;
-                                case 3:
-                                    //coconut
-                                    x[2] = 835;
-                                    y[2] = 554;
-                                    if (recordTime[2] >= limitedRecordTime) {
-                                        states[2] = true;
-                                    } else {
-                                        recordedRssi[2] = recordedRssi[2] + beacon.getRssi();
-                                        recordedTxpower[2] = recordedTxpower[2] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
-                                        recordTime[2]++;
-                                    }
-                                    break;
-                            }
-                        }
-
-                        Log.e("states", "states result: blueberry:" + states[0] + ", mint:" + states[1] + ", coconut:" + states[2]);
-
-                        // Calculate the trilateration and store the result in the result array
-                        if (states[0] != false && states[1] != false && states[2] != false) {
-                            for (int j = 0; j < 3; j++) {
-                                rssi[j] = recordedRssi[j] / recordTime[j];
-                                txPower[j] = recordedTxpower[j] / recordTime[j];
-                                Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
-                                states[j] = false;
-                                recordTime[j] = 0;
-                            }
-                            trilateration = new Trilateration();
-                            position = trilateration.calculation(x, y, rssi, txPower);
-                            Log.e("Location", "Location result: " + position[0] + ", " + position[1]);
-
-                            // Update UI with the result
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Update UI with the result
-                                    tvNameMsg.setText("Hello, " + nameInput.getText());
-                                    tvSResultX.setText(Double.toString(position[0]));
-                                    tvSResultY.setText(Double.toString(position[1]));
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                                    String currentDateTime = dateFormat.format(new Date());
-                                    tvTimeMsg.setText("Recored time: " + currentDateTime);
-                                    long elapsedTime = System.currentTimeMillis() - startTime;
-                                    elapsedTime = elapsedTime / 1000;
-                                    Toast.makeText(TakeAttendance.this, "Calculations completed in " + elapsedTime + " s", Toast.LENGTH_LONG).show();
-                                    // Hide the loading indicator
-                                    progressDialog.dismiss();
-                                    beaconManager.disconnect();
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        });
-
-        bt4Beacon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                maptype = 2;
                 // Capture the start time
                 final long startTime = System.currentTimeMillis();
 
@@ -290,8 +154,6 @@ public class TakeAttendance extends AppCompatActivity {
 
                                 case 15322:
                                     //blueberry
-                                    x[0] = 400;
-                                    y[0] = 0;
                                     if (recordTime[0] >= limitedRecordTime) {
                                         states[0] = true;
                                     } else {
@@ -302,9 +164,7 @@ public class TakeAttendance extends AppCompatActivity {
                                     }
                                     break;
                                 case 2:
-                                    //ice
-                                    x[1] = 46;
-                                    y[1] = 532;
+                                    //mint
                                     if (recordTime[1] >= limitedRecordTime) {
                                         states[1] = true;
                                     } else {
@@ -316,8 +176,6 @@ public class TakeAttendance extends AppCompatActivity {
                                     break;
                                 case 3:
                                     //coconut
-                                    x[2] = 835;
-                                    y[2] = 554;
                                     if (recordTime[2] >= limitedRecordTime) {
                                         states[2] = true;
                                     } else {
@@ -328,10 +186,10 @@ public class TakeAttendance extends AppCompatActivity {
                                     }
                                     break;
 
-                                case 1:
-                                    //coconut
-                                    x[3] = 480;
-                                    y[3] = 532;
+                                    case 1:
+                                    //ice
+                                    y[3] = 360;
+                                    y[3] = 824;
                                     if (recordTime[3] >= limitedRecordTime) {
                                         states[3] = true;
                                     } else {
@@ -341,6 +199,8 @@ public class TakeAttendance extends AppCompatActivity {
                                         recordTime[3]++;
                                     }
                                     break;
+
+
                             }
                         }
 
@@ -351,158 +211,28 @@ public class TakeAttendance extends AppCompatActivity {
                             for (int j = 0; j < states.length; j++) {
                                 rssi[j] = recordedRssi[j] / recordTime[j];
                                 txPower[j] = recordedTxpower[j] / recordTime[j];
-                                Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
+                                Log.e("Location", "Average RSSI value of beacon" + (j+1) + " : " + rssi[j]);
+                                //reset data set
                                 states[j] = false;
                                 recordTime[j] = 0;
+                                recordedRssi[j] = 0;
+                                recordedTxpower[j] = 0;
                             }
+
+                            //cal 3 beacon
                             trilateration = new Trilateration();
+                            position = trilateration.calculation(x, y, rssi, txPower);
+                            Log.e("Location", "Location result(3 beacon): " + position[0] + ", " + position[1]);
+                            tvSResultX.setText(Double.toString(position[0]));
+                            tvSResultY.setText(Double.toString(position[1]));
+
+                            //cal 4 beacon
                             position = trilateration.multiCalculation(x, y, rssi, txPower);
-                            Log.e("Location", "Location result: " + position[0] + ", " + position[1]);
+                            Log.e("Location", "Location result(4 beacon): " + position[0] + ", " + position[1]);
+                            tvSResult4BX.setText(Double.toString(position[0]));
+                            tvSResult4BY.setText(Double.toString(position[1]));
 
-                            // Update UI with the result
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Update UI with the result
-                                    tvNameMsg.setText("Hello, " + nameInput.getText());
-                                    tvSResultX.setText(Double.toString(position[0]));
-                                    tvSResultY.setText(Double.toString(position[1]));
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                                    String currentDateTime = dateFormat.format(new Date());
-                                    tvTimeMsg.setText("Recored time: " + currentDateTime);
-                                    long elapsedTime = System.currentTimeMillis() - startTime;
-                                    elapsedTime = elapsedTime / 1000;
-                                    Toast.makeText(TakeAttendance.this, "Calculations completed in " + elapsedTime + " s", Toast.LENGTH_LONG).show();
-                                    // Hide the loading indicator
-                                    progressDialog.dismiss();
-                                    beaconManager.disconnect();
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        });
-
-        btCNN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                maptype = 1;
-                // Capture the start time
-                final long startTime = System.currentTimeMillis();
-
-                LinearLayout login_layout = findViewById(R.id.login_layout);
-                login_layout.setVisibility(View.VISIBLE);
-
-                String name = nameInput.getText().toString();
-
-                // Show loading indicator
-                ProgressDialog progressDialog = ProgressDialog.show(TakeAttendance.this, "Calculating", "Please wait...", true);
-
-                // Run calculation on a background thread
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        // Define the regions to search for the beacons
-                        String regionNameBlueberry = "Blueberry";
-                        UUID regionUUIDBlueberry = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorBlueberry = 10016;
-                        int minorBlueberry = 15322;
-                        regionBlueberry = new BeaconRegion(regionNameBlueberry, regionUUIDBlueberry, majorBlueberry, minorBlueberry);
-
-                        String regionNameMint = "mint";
-                        UUID regionUUIDMint = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorMint = 30001;
-                        int minorMint = 2;
-                        regionMint = new BeaconRegion(regionNameMint, regionUUIDMint, majorMint, minorMint);
-
-                        String regionNameCoconut = "Coconut";
-                        UUID regionUUIDCoconut = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-                        int majorCoconut = 30001;
-                        int minorCoconut = 3;
-                        regionCoconut = new BeaconRegion(regionNameCoconut, regionUUIDCoconut, majorCoconut, minorCoconut);
-
-                        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-                            @Override
-                            public void onServiceReady() {
-                                beaconManager.startRanging(regionBlueberry);
-                                beaconManager.startRanging(regionMint);
-                                beaconManager.startRanging(regionCoconut);
-                            }
-                        });
-                        return null;
-                    }
-
-
-                    protected void onPostExecute() {
-                    }
-                }.execute();
-
-                beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
-                    @Override
-                    public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
-                        Log.i("Beacon", "Start listen!");
-                        // The result is a list of Beacon objects.
-                        int i = 0;
-
-                        for (Beacon beacon : beacons) {
-
-                            // Store the position and distance of each beacon
-                            switch (beacon.getMinor()) {
-
-                                case 15322:
-                                    //blueberry
-                                    x[0] = 400;
-                                    y[0] = 0;
-                                    if (recordTime[0] >= limitedRecordTime) {
-                                        states[0] = true;
-                                    } else {
-                                        recordedRssi[0] = recordedRssi[0] + beacon.getRssi();
-                                        recordedTxpower[0] = recordedTxpower[0] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
-                                        recordTime[0]++;
-                                    }
-                                    break;
-                                case 2:
-                                    //ice
-                                    x[1] = 46;
-                                    y[1] = 532;
-                                    if (recordTime[1] >= limitedRecordTime) {
-                                        states[1] = true;
-                                    } else {
-                                        recordedRssi[1] = recordedRssi[1] + beacon.getRssi();
-                                        recordedTxpower[1] = recordedTxpower[0] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
-                                        recordTime[1]++;
-                                    }
-                                    break;
-                                case 3:
-                                    //coconut
-                                    x[2] = 835;
-                                    y[2] = 554;
-                                    if (recordTime[2] >= limitedRecordTime) {
-                                        states[2] = true;
-                                    } else {
-                                        recordedRssi[2] = recordedRssi[2] + beacon.getRssi();
-                                        recordedTxpower[2] = recordedTxpower[2] + beacon.getMeasuredPower();
-                                        Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
-                                        recordTime[2]++;
-                                    }
-                                    break;
-                            }
-                        }
-
-                        Log.e("states", "states result: blueberry:" + states[0] + ", mint:" + states[1] + ", coconut:" + states[2]);
-
-                        // Calculate the trilateration and store the result in the result array
-                        if (states[0] != false && states[1] != false && states[2] != false) {
-                            for (int j = 0; j < 3; j++) {
-                                rssi[j] = recordedRssi[j] / recordTime[j];
-                                txPower[j] = recordedTxpower[j] / recordTime[j];
-                                Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
-                                states[j] = false;
-                                recordTime[j] = 0;
-                            }
+                            //cal CNN
                             BeaconLocalizer beaconLocalizer = null;
                             try {
                                 beaconLocalizer = new BeaconLocalizer(TakeAttendance.this);
@@ -510,7 +240,9 @@ public class TakeAttendance extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             position = beaconLocalizer.calculatePosition(rssi);
-                            Log.e("Location", "Location result: " + position[0] + ", " + position[1]);
+                            Log.e("Location", "Location result(CNN with 3 beacon RSSI): " + position[0] + ", " + position[1]);
+                            tvSResultCNNX.setText(Double.toString(position[0]));
+                            tvSResultCNNY.setText(Double.toString(position[1]));
 
                             // Update UI with the result
                             runOnUiThread(new Runnable() {
@@ -518,8 +250,6 @@ public class TakeAttendance extends AppCompatActivity {
                                 public void run() {
                                     // Update UI with the result
                                     tvNameMsg.setText("Hello, " + nameInput.getText());
-                                    tvSResultX.setText(Double.toString(position[0]));
-                                    tvSResultY.setText(Double.toString(position[1]));
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                                     String currentDateTime = dateFormat.format(new Date());
                                     tvTimeMsg.setText("Recored time: " + currentDateTime);
@@ -537,15 +267,363 @@ public class TakeAttendance extends AppCompatActivity {
             }
         });
 
+//        bt4Beacon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                maptype = 2;
+//                // Capture the start time
+//                final long startTime = System.currentTimeMillis();
+//
+//                LinearLayout login_layout = findViewById(R.id.login_layout);
+//                login_layout.setVisibility(View.VISIBLE);
+//
+//                String name = nameInput.getText().toString();
+//
+//                // Show loading indicator
+//                ProgressDialog progressDialog = ProgressDialog.show(TakeAttendance.this, "Calculating", "Please wait...", true);
+//
+//                // Run calculation on a background thread
+//                new AsyncTask<Void, Void, Void>() {
+//                    @Override
+//                    protected Void doInBackground(Void... params) {
+//                        // Define the regions to search for the beacons
+//                        String regionNameBlueberry = "Blueberry";
+//                        UUID regionUUIDBlueberry = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorBlueberry = 10016;
+//                        int minorBlueberry = 15322;
+//                        regionBlueberry = new BeaconRegion(regionNameBlueberry, regionUUIDBlueberry, majorBlueberry, minorBlueberry);
+//
+//                        String regionNameMint = "mint";
+//                        UUID regionUUIDMint = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorMint = 30001;
+//                        int minorMint = 2;
+//                        regionMint = new BeaconRegion(regionNameMint, regionUUIDMint, majorMint, minorMint);
+//
+//                        String regionNameCoconut = "Coconut";
+//                        UUID regionUUIDCoconut = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorCoconut = 30001;
+//                        int minorCoconut = 3;
+//                        regionCoconut = new BeaconRegion(regionNameCoconut, regionUUIDCoconut, majorCoconut, minorCoconut);
+//
+//                        String regionNameIce = "Ice";
+//                        UUID regionUUIDIce = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorIce = 20001;
+//                        int minorIce = 1;
+//                        regionIce = new BeaconRegion(regionNameIce, regionUUIDIce, majorIce, minorIce);
+//
+//                        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+//                            @Override
+//                            public void onServiceReady() {
+//                                beaconManager.startRanging(regionIce);
+//                                beaconManager.startRanging(regionBlueberry);
+//                                beaconManager.startRanging(regionMint);
+//                                beaconManager.startRanging(regionCoconut);
+//                            }
+//                        });
+//                        return null;
+//                    }
+//
+//
+//                    protected void onPostExecute() {
+//                    }
+//                }.execute();
+//
+//                beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
+//                    @Override
+//                    public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
+//                        Log.i("Beacon", "Start listen!");
+//                        // The result is a list of Beacon objects.
+//                        int i = 0;
+//
+//                        for (Beacon beacon : beacons) {
+//
+//                            // Store the position and distance of each beacon
+//                            switch (beacon.getMinor()) {
+//
+//                                case 15322:
+//                                    //blueberry
+//                                    if (recordTime[0] >= limitedRecordTime) {
+//                                        states[0] = true;
+//                                    } else {
+//                                        recordedRssi[0] = recordedRssi[0] + beacon.getRssi();
+//                                        recordedTxpower[0] = recordedTxpower[0] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
+//                                        recordTime[0]++;
+//                                    }
+//                                    break;
+//                                case 1:
+//                                    //ice
+//                                    y[3] = 360;
+//                                    y[3] = 824;
+//                                    if (recordTime[3] >= limitedRecordTime) {
+//                                        states[3] = true;
+//                                    } else {
+//                                        recordedRssi[3] = recordedRssi[3] + beacon.getRssi();
+//                                        recordedTxpower[3] = recordedTxpower[3] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 1 value: " + beacon.getRssi());
+//                                        recordTime[3]++;
+//                                    }
+//                                    break;
+//
+//                                case 2:
+//                                    //ice
+//                                    if (recordTime[1] >= limitedRecordTime) {
+//                                        states[1] = true;
+//                                    } else {
+//                                        recordedRssi[1] = recordedRssi[1] + beacon.getRssi();
+//                                        recordedTxpower[1] = recordedTxpower[0] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
+//                                        recordTime[1]++;
+//                                    }
+//                                    break;
+//                                case 3:
+//                                    //coconut
+//                                    if (recordTime[2] >= limitedRecordTime) {
+//                                        states[2] = true;
+//                                    } else {
+//                                        recordedRssi[2] = recordedRssi[2] + beacon.getRssi();
+//                                        recordedTxpower[2] = recordedTxpower[2] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
+//                                        recordTime[2]++;
+//                                    }
+//                                    break;
+//
+//
+//                            }
+//                        }
+//
+//                        Log.e("states", "states result: blueberry:" + states[0] + ", mint:" + states[1] + ", coconut:" + states[2] + ", ice:" + states[3]);
+//
+//                        // Calculate the trilateration and store the result in the result array
+//                        if (states[0] != false && states[1] != false && states[2] != false && states[3] != false) {
+//                            for (int j = 0; j < states.length; j++) {
+//                                rssi[j] = recordedRssi[j] / recordTime[j];
+//                                txPower[j] = recordedTxpower[j] / recordTime[j];
+//                                Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
+//                                states[j] = false;
+//                                recordTime[j] = 0;
+//                            }
+//                            trilateration = new Trilateration();
+//                            position = trilateration.multiCalculation(x, y, rssi, txPower);
+//                            Log.e("Location", "Location result: " + position[0] + ", " + position[1]);
+//
+//                            // Update UI with the result
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    // Update UI with the result
+//                                    tvNameMsg.setText("Hello, " + nameInput.getText());
+//                                    tvSResultX.setText(Double.toString(position[0]));
+//                                    tvSResultY.setText(Double.toString(position[1]));
+//                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                                    String currentDateTime = dateFormat.format(new Date());
+//                                    tvTimeMsg.setText("Recored time: " + currentDateTime);
+//                                    long elapsedTime = System.currentTimeMillis() - startTime;
+//                                    elapsedTime = elapsedTime / 1000;
+//                                    Toast.makeText(TakeAttendance.this, "Calculations completed in " + elapsedTime + " s", Toast.LENGTH_LONG).show();
+//                                    // Hide the loading indicator
+//                                    progressDialog.dismiss();
+//                                    beaconManager.disconnect();
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+//            }
+//        });
+//
+//        btCNN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                maptype = 1;
+//                // Capture the start time
+//                final long startTime = System.currentTimeMillis();
+//
+//                LinearLayout login_layout = findViewById(R.id.login_layout);
+//                login_layout.setVisibility(View.VISIBLE);
+//
+//                String name = nameInput.getText().toString();
+//
+//                // Show loading indicator
+//                ProgressDialog progressDialog = ProgressDialog.show(TakeAttendance.this, "Calculating", "Please wait...", true);
+//
+//                // Run calculation on a background thread
+//                new AsyncTask<Void, Void, Void>() {
+//                    @Override
+//                    protected Void doInBackground(Void... params) {
+//                        // Define the regions to search for the beacons
+//                        String regionNameBlueberry = "Blueberry";
+//                        UUID regionUUIDBlueberry = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorBlueberry = 10016;
+//                        int minorBlueberry = 15322;
+//                        regionBlueberry = new BeaconRegion(regionNameBlueberry, regionUUIDBlueberry, majorBlueberry, minorBlueberry);
+//
+//                        String regionNameMint = "mint";
+//                        UUID regionUUIDMint = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorMint = 30001;
+//                        int minorMint = 2;
+//                        regionMint = new BeaconRegion(regionNameMint, regionUUIDMint, majorMint, minorMint);
+//
+//                        String regionNameCoconut = "Coconut";
+//                        UUID regionUUIDCoconut = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+//                        int majorCoconut = 30001;
+//                        int minorCoconut = 3;
+//                        regionCoconut = new BeaconRegion(regionNameCoconut, regionUUIDCoconut, majorCoconut, minorCoconut);
+//
+//                        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+//                            @Override
+//                            public void onServiceReady() {
+//                                beaconManager.startRanging(regionBlueberry);
+//                                beaconManager.startRanging(regionMint);
+//                                beaconManager.startRanging(regionCoconut);
+//                            }
+//                        });
+//                        return null;
+//                    }
+//
+//
+//                    protected void onPostExecute() {
+//                    }
+//                }.execute();
+//
+//                beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
+//                    @Override
+//                    public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
+//                        Log.i("Beacon", "Start listen!");
+//                        // The result is a list of Beacon objects.
+//                        int i = 0;
+//
+//                        for (Beacon beacon : beacons) {
+//
+//                            // Store the position and distance of each beacon
+//                            switch (beacon.getMinor()) {
+//
+//                                case 15322:
+//                                    //blueberry
+//                                    x[0] = 400;
+//                                    y[0] = 0;
+//                                    if (recordTime[0] >= limitedRecordTime) {
+//                                        states[0] = true;
+//                                    } else {
+//                                        recordedRssi[0] = recordedRssi[0] + beacon.getRssi();
+//                                        recordedTxpower[0] = recordedTxpower[0] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 15322 value: " + beacon.getRssi());
+//                                        recordTime[0]++;
+//                                    }
+//                                    break;
+//                                case 2:
+//                                    //ice
+//                                    x[1] = 46;
+//                                    y[1] = 532;
+//                                    if (recordTime[1] >= limitedRecordTime) {
+//                                        states[1] = true;
+//                                    } else {
+//                                        recordedRssi[1] = recordedRssi[1] + beacon.getRssi();
+//                                        recordedTxpower[1] = recordedTxpower[0] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 2 value: " + beacon.getRssi());
+//                                        recordTime[1]++;
+//                                    }
+//                                    break;
+//                                case 3:
+//                                    //coconut
+//                                    x[2] = 835;
+//                                    y[2] = 554;
+//                                    if (recordTime[2] >= limitedRecordTime) {
+//                                        states[2] = true;
+//                                    } else {
+//                                        recordedRssi[2] = recordedRssi[2] + beacon.getRssi();
+//                                        recordedTxpower[2] = recordedTxpower[2] + beacon.getMeasuredPower();
+//                                        Log.e("RSSI", "RSSI 3 value: " + beacon.getRssi());
+//                                        recordTime[2]++;
+//                                    }
+//                                    break;
+//                            }
+//                        }
+//
+//                        Log.e("states", "states result: blueberry:" + states[0] + ", mint:" + states[1] + ", coconut:" + states[2]);
+//
+//                        // Calculate the trilateration and store the result in the result array
+//                        if (states[0] != false && states[1] != false && states[2] != false) {
+//                            for (int j = 0; j < 3; j++) {
+//                                rssi[j] = recordedRssi[j] / recordTime[j];
+//                                txPower[j] = recordedTxpower[j] / recordTime[j];
+//                                Log.e("RSSI", "Average RSSI value of beacon" + j + " : " + rssi[j]);
+//                                states[j] = false;
+//                                recordTime[j] = 0;
+//                            }
+//                            BeaconLocalizer beaconLocalizer = null;
+//                            try {
+//                                beaconLocalizer = new BeaconLocalizer(TakeAttendance.this);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                            position = beaconLocalizer.calculatePosition(rssi);
+//                            Log.e("Location", "Location result: " + position[0] + ", " + position[1]);
+//
+//                            // Update UI with the result
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    // Update UI with the result
+//                                    tvNameMsg.setText("Hello, " + nameInput.getText());
+//                                    tvSResultX.setText(Double.toString(position[0]));
+//                                    tvSResultY.setText(Double.toString(position[1]));
+//                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                                    String currentDateTime = dateFormat.format(new Date());
+//                                    tvTimeMsg.setText("Recored time: " + currentDateTime);
+//                                    long elapsedTime = System.currentTimeMillis() - startTime;
+//                                    elapsedTime = elapsedTime / 1000;
+//                                    Toast.makeText(TakeAttendance.this, "Calculations completed in " + elapsedTime + " s", Toast.LENGTH_LONG).show();
+//                                    // Hide the loading indicator
+//                                    progressDialog.dismiss();
+//                                    beaconManager.disconnect();
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+//            }
+//        });
+
 
         btMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Map.class);
+                position[0] = Double.parseDouble(tvSResultX.getText().toString());
+                position[1] = Double.parseDouble(tvSResultY.getText().toString());
                 intent.putExtra("result", position);
                 intent.putExtra("x", x);
                 intent.putExtra("y", y);
-                intent.putExtra("test", maptype);
+                intent.putExtra("test", 1);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        btMap4B.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Map.class);
+                position[0] = Double.parseDouble(tvSResult4BX.getText().toString());
+                position[1] = Double.parseDouble(tvSResult4BY.getText().toString());
+                intent.putExtra("result", position);
+                intent.putExtra("x", x);
+                intent.putExtra("y", y);
+                intent.putExtra("test", 2);
+                startActivityForResult(intent, 2);
+            }
+        });
+
+        btMapCNN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Map.class);
+                position[0] = Double.parseDouble(tvSResultCNNX.getText().toString());
+                position[1] = Double.parseDouble(tvSResultCNNY.getText().toString());
+                intent.putExtra("result", position);
+                intent.putExtra("x", x);
+                intent.putExtra("y", y);
+                intent.putExtra("test", 1);
                 startActivityForResult(intent, 1);
             }
         });
