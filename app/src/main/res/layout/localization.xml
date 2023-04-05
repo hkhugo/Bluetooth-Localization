@@ -527,13 +527,6 @@
                 android:onClick="onButtonClicked"
                 android:text="Submit in CNN \n " />
 
-            <Button
-                android:id="@+id/btCNNOwnData"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onButtonClicked"
-                android:text="Submit in CNN with own data" />
         </LinearLayout>
 
         <Button

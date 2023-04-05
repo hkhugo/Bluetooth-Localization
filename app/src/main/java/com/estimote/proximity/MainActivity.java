@@ -28,9 +28,11 @@ import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.proximity.algorithms.Trilateration;
 import com.estimote.proximity.deviceList.ListDevice;
 import com.estimote.proximity.map.Map;
-import com.estimote.proximity.tensorFlowLite.BeaconCNN;
-import com.estimote.proximity.tensorFlowLite.BeaconFFNN;
+//import com.estimote.proximity.tensorFlowLite.BeaconCNN;
+//import com.estimote.proximity.tensorFlowLite.BeaconFFNN;
 import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
+
+import java.io.IOException;
 
 //import org.tensorflow.lite.DataType;
 //import org.tensorflow.lite.Interpreter;
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ClickLogout(View view) throws Exception {
-//        logout(this);
+        logout(this);
         //testing purpose
 //        BeaconLocalizer beaconLocalizer = new BeaconLocalizer(this);
 //        beaconLocalizer.comparison(this);
@@ -109,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
 //        BeaconLocalizationModel3gateways.comparison(this);
 //        BeaconCNN beaconCNN = new BeaconCNN(this);
 //        beaconCNN.comparison(this);
-        BeaconFFNN beaconFFNN = new BeaconFFNN(this);
-        beaconFFNN.comparison(this);
+//        BeaconFFNN beaconFFNN = new BeaconFFNN(this);
+//        beaconFFNN.comparison(this);
     }
 
     public void ClickEmpty(View view) {
@@ -141,10 +143,6 @@ public class MainActivity extends AppCompatActivity {
     public void onButtonClicked(View view) {
         String TAG = "MyActivity";
         Log.i(TAG, "Clicked calculate");
-        EditText ptTx1 = findViewById(R.id.ptTx1);
-        EditText ptTx2 = findViewById(R.id.ptTx2);
-        EditText ptTx3 = findViewById(R.id.ptTx3);
-        EditText ptTx4 = findViewById(R.id.ptTx4);
         EditText ptx1 = findViewById(R.id.ptx1);
         EditText ptx2 = findViewById(R.id.ptx2);
         EditText ptx3 = findViewById(R.id.ptx3);
@@ -157,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
         EditText ptRSSI2 = findViewById(R.id.ptRSSI2);
         EditText ptRSSI3 = findViewById(R.id.ptRSSI3);
         EditText ptRSSI4 = findViewById(R.id.ptRSSI4);
+        EditText ptTx1 = findViewById(R.id.ptTx1);
+        EditText ptTx2 = findViewById(R.id.ptTx2);
+        EditText ptTx3 = findViewById(R.id.ptTx3);
+        EditText ptTx4 = findViewById(R.id.ptTx4);
         TextView tvResultX = findViewById(R.id.tvResultX);
         TextView tvResultY = findViewById(R.id.tvResultY);
 
@@ -214,6 +216,39 @@ public class MainActivity extends AppCompatActivity {
                 rssi[2] = Double.parseDouble(ptRSSI3.getText().toString());
                 rssi[3] = Double.parseDouble(ptRSSI4.getText().toString());
                 result = Trilateration.multiCalculation(x, y, rssi, txPower);
+                tvResultX.setText(Double.toString(result[0]));
+                tvResultY.setText(Double.toString(result[1]));
+                break;
+
+            case R.id.btCNN:
+                beaconNumber = 4;
+                txPower = new double[4];
+                txPower[0] = Double.parseDouble(ptTx1.getText().toString());
+                txPower[1] = Double.parseDouble(ptTx2.getText().toString());
+                txPower[2] = Double.parseDouble(ptTx3.getText().toString());
+                txPower[3] = Double.parseDouble(ptTx4.getText().toString());
+                x = new double[4];
+                x[0] = Double.parseDouble(ptx1.getText().toString());
+                x[1] = Double.parseDouble(ptx2.getText().toString());
+                x[2] = Double.parseDouble(ptx3.getText().toString());
+                x[3] = Double.parseDouble(ptx4.getText().toString());
+                y = new double[4];
+                y[0] = Double.parseDouble(pty1.getText().toString());
+                y[1] = Double.parseDouble(pty2.getText().toString());
+                y[2] = Double.parseDouble(pty3.getText().toString());
+                y[3] = Double.parseDouble(pty4.getText().toString());
+                rssi = new double[4];
+                rssi[0] = Double.parseDouble(ptRssi1.getText().toString());
+                rssi[1] = Double.parseDouble(ptRSSI2.getText().toString());
+                rssi[2] = Double.parseDouble(ptRSSI3.getText().toString());
+                rssi[3] = Double.parseDouble(ptRSSI4.getText().toString());
+                BeaconLocalizer beaconLocalizer = null;
+                try {
+                    beaconLocalizer = new BeaconLocalizer(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                result = beaconLocalizer.calculatePosition(rssi);
                 tvResultX.setText(Double.toString(result[0]));
                 tvResultY.setText(Double.toString(result[1]));
                 break;

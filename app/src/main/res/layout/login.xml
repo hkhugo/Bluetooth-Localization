@@ -28,8 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customborder"
-        android:orientation="vertical">
-<!--        android:visibility="gone">-->
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/tvNameMsg"
