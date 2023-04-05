@@ -34,12 +34,6 @@ import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
 
 import java.io.IOException;
 
-//import org.tensorflow.lite.DataType;
-//import org.tensorflow.lite.Interpreter;
-//import org.tensorflow.lite.Tensor;
-//import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
-
-
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView navigationTV;
@@ -104,15 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClickLogout(View view) throws Exception {
         logout(this);
-        //testing purpose
-//        BeaconLocalizer beaconLocalizer = new BeaconLocalizer(this);
-//        beaconLocalizer.comparison(this);
-//        BeaconLocalizer3Beacon BeaconLocalizationModel3gateways = new BeaconLocalizer3Beacon();
-//        BeaconLocalizationModel3gateways.comparison(this);
-//        BeaconCNN beaconCNN = new BeaconCNN(this);
-//        beaconCNN.comparison(this);
-//        BeaconFFNN beaconFFNN = new BeaconFFNN(this);
-//        beaconFFNN.comparison(this);
     }
 
     public void ClickEmpty(View view) {

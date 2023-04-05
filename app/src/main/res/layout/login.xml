@@ -231,36 +231,6 @@
         </LinearLayout>
 
 
-        <!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/bt4Beacon"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:onClick="onButtonClicked"-->
-<!--                android:text="Adjust position \n by 4 beacon" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/btCNN"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:onClick="onButtonClicked"-->
-<!--                android:text="Adjust position \n by AI" />-->
-<!--        </LinearLayout>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btCNNOwnDataResult"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:onClick="onButtonClicked"-->
-<!--            android:text="Adjust position \n by AI" />-->
-
         <Button
             android:id="@+id/btMapCNN"
             android:layout_width="match_parent"
