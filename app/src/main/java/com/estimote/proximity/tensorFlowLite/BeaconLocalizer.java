@@ -56,7 +56,7 @@ public class BeaconLocalizer {
         return position;
     }
 
-
+    // for testing purpose
     public void comparison(Context context){
         double[] x = new double[3];
         x[0] = 4.80;

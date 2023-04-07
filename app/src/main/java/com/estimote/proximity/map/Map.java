@@ -163,30 +163,6 @@ public class Map extends AppCompatActivity {
                         " target device: (" + rx + ", " + ry + ")",
                         16);
 
-//                // Create a LocationView object for device 1's location
-//                locationView[1] = new LocationView(this,
-//                        (float) (((x[0] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[0] - minY) * scaleY + padding) * 0.9),
-//                        Color.RED,
-//                        " Beacon 1: (" + x[0] + ", " + y[0] + ")",
-//                        16);
-//
-//                // Create a LocationView object for device 2's location
-//                locationView[2] = new LocationView(this,
-//                        (float) (((x[1] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[1] - minY) * scaleY + padding) * 0.9),
-//                        Color.GREEN,
-//                        " Beacon 2: (" + x[1] + ", " + y[1] + ")",
-//                        16);
-//
-//                // Create a LocationView object for device 3's location
-//                locationView[3] = new LocationView(this,
-//                        (float) (((x[2] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[2] - minY) * scaleY + padding) * 0.9),
-//                        Color.BLUE,
-//                        " Beacon 3: (" + x[2] + ", " + y[2] + ")",
-//                        16);
-
             } else {
 
                 locationView = new LocationView[5];
@@ -212,37 +188,6 @@ public class Map extends AppCompatActivity {
                         " target device: (" + rx + ", " + ry + ")",
                         16);
 
-//                // Create a LocationView object for device 1's location
-//                locationView1 = new LocationView(this,
-//                        (float) (((x[0] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[0] - minY) * scaleY + padding) * 0.9),
-//                        Color.RED,
-//                        " Beacon 1: (" + x[0] + ", " + y[0] + ")",
-//                        16);
-//
-//                // Create a LocationView object for device 2's location
-//                locationView2 = new LocationView(this,
-//                        (float) (((x[1] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[1] - minY) * scaleY + padding) * 0.9),
-//                        Color.GREEN,
-//                        " Beacon 2: (" + x[1] + ", " + y[1] + ")",
-//                        16);
-//
-//                // Create a LocationView object for device 3's location
-//                locationView3 = new LocationView(this,
-//                        (float) (((x[2] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[2] - minY) * scaleY + padding) * 0.9),
-//                        Color.BLUE,
-//                        " Beacon 3: (" + x[2] + ", " + y[2] + ")",
-//                        16);
-//
-//                // Create a LocationView object for device 4's location
-//                locationView4 = new LocationView(this,
-//                        (float) (((x[3] - minX) * scaleX + padding) * 0.9),
-//                        (float) (((y[3] - minY) * scaleY + padding) * 0.9),
-//                        Color.GRAY,
-//                        " Beacon 4: (" + x[3] + ", " + y[3] + ")",
-//                        16);
             }
             // Find the location_container and add the LocationView to it
 
@@ -261,11 +206,6 @@ public class Map extends AppCompatActivity {
             for(int j = 0; j < locationView.length; j++){
                 container.addView(locationView[j]);
             }
-//            container.addView(locationView);
-//            container.addView(locationView1);
-//            container.addView(locationView2);
-//            container.addView(locationView3);
-//            container.addView(locationView4);
         }
     }
 }

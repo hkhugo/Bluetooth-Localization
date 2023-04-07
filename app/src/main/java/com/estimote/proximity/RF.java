@@ -33,8 +33,6 @@ public class RF extends AsyncTask<String, Double, String> {
         // Create an OkHttpClient instance
         OkHttpClient client = new OkHttpClient();
 
-
-
         // Define the input data as a JSON string
         String json = "{\"input_data\": [ " + rssi[0] + " ," + rssi[1] + " ,"+ rssi[2] + " ,"+ rssi[3]+"]}";
 

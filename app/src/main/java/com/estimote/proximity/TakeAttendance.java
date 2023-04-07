@@ -90,6 +90,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
         double[] recordedTxpower = new double[4];
         boolean[] states = new boolean[4];
 
+        //start calculation in background
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +151,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
                     }
                 }.execute();
 
+                //Beacon Start listen!
                 beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
                     @Override
                     public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> beacons) {
@@ -282,6 +284,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
             }
         });
 
+        //show map in Trilateration in 3 Beacon
         btMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,6 +299,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
             }
         });
 
+        //show map in Trilateration in 4 Beacon
         btMap4B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -310,6 +314,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
             }
         });
 
+        ////show map in CNN
         btMapCNN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,6 +329,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
             }
         });
 
+        //show map in random forest
         btMapRF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

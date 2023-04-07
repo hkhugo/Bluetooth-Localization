@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
         tvResultX = findViewById(R.id.tvResultX);
         tvResultY = findViewById(R.id.tvResultY);
 
-
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         }
@@ -108,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
         startActivity(intent);
     }
 
+    //logout
     public void ClickLogout(View view) throws Exception {
         logout(this);
     }
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
         builder.show();
     }
 
-    //
+    //summit calculation
     public void onButtonClicked(View view) {
         String TAG = "MyActivity";
         Log.i(TAG, "Clicked calculate");
@@ -165,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
         double[] y;
         double[] rssi;
 
+        //Trilateration in 3 Beacon
         switch (view.getId()) {
             case R.id.btSubmit:
                 beaconNumber = 3;
@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
                 tvResultY.setText(Double.toString(result[1]));
                 break;
 
+            //Trilateration in 4 Beacon
             case R.id.btSubmitExtraBeacon:
                 beaconNumber = 4;
                 txPower = new double[4];
@@ -217,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
                 tvResultY.setText(Double.toString(result[1]));
                 break;
 
+            //CNN
             case R.id.btCNN:
                 beaconNumber = 4;
                 txPower = new double[4];
@@ -250,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
                 tvResultY.setText(Double.toString(result[1]));
                 break;
 
+            //random forest
             case R.id.btRF:
                 beaconNumber = 4;
                 rssi = new double[4];
@@ -260,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements PredictionListene
                 RF rf = new RF(predictionListener, rssi);
                 rf.execute();
                 break;
-
+                //map button
             case R.id.btShowmap:
                 Log.i(TAG, "clicked map now");
                 if (result != null) {
