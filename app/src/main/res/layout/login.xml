@@ -1,260 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/take_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:allowBackup="true">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter your name:" />
-
-    <EditText
-        android:id="@+id/name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/calculate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter" />
+    android:fillViewport="false">
 
     <LinearLayout
-        android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customborder"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/tvNameMsg"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:textAlignment="center" />
+            android:text="Enter your name:" />
 
         <EditText
-            android:id="@+id/tvAttendanceMsg"
+            android:id="@+id/name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:text="You have taken attendance"
-            android:textAlignment="center" />
+            android:inputType="text" />
 
-        <EditText
-            android:id="@+id/tvAttendanceResult"
+        <Button
+            android:id="@+id/calculate_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:text="Your position(3 beacon):"
-            android:textAlignment="center" />
-
+            android:text="Enter" />
 
         <LinearLayout
+            android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvSX"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minHeight="48dp"
-                android:text="X:"
-                android:textAlignment="textEnd" />
+            android:background="@drawable/customborder"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <EditText
-                android:id="@+id/tvSResultX"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvNameMsg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="numberDecimal|numberSigned"
-                android:minHeight="48dp" />
-
-            <TextView
-                android:id="@+id/tvSY"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Y:"
-                android:textAlignment="textEnd" />
-
-            <EditText
-                android:id="@+id/tvSResultY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="numberDecimal|numberSigned" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btMap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Your Location" />
-
-        <EditText
-            android:id="@+id/tvAttendanceResult4B"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:text="Your position(4 beacon):"
-            android:textAlignment="center" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvS4BX"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:minHeight="48dp"
-                android:text="X:"
-                android:textAlignment="textEnd" />
+                android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/tvSResult4BX"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvAttendanceMsg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="numberDecimal|numberSigned"
-                android:minHeight="48dp" />
-
-            <TextView
-                android:id="@+id/tvS4BY"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Y:"
-                android:textAlignment="textEnd" />
-
-            <EditText
-                android:id="@+id/tvSResult4BY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="numberDecimal|numberSigned" />
-
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btMap4B"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Your Location" />
-
-        <EditText
-            android:id="@+id/tvAttendanceCNNResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:text="Your position(CNN):"
-            android:textAlignment="center" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvSCNNX"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:minHeight="48dp"
-                android:text="X:"
-                android:textAlignment="textEnd" />
+                android:text="You have taken attendance"
+                android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/tvSResultCNNX"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvAttendanceResult"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="numberDecimal|numberSigned"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:text="Your position(3 beacon):"
+                android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/tvSCNNY"
-                android:layout_width="100dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Y:"
-                android:textAlignment="textEnd" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSX"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="X:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvSY"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Y:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Your Location" />
 
             <EditText
-                android:id="@+id/tvSResultCNNY"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvAttendanceResult4B"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="numberDecimal|numberSigned" />
+                android:inputType="numberDecimal|numberSigned"
+                android:minHeight="48dp"
+                android:text="Your position(4 beacon):"
+                android:textAlignment="center" />
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvS4BX"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="X:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResult4BX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvS4BY"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Y:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResult4BY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btMap4B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Your Location" />
+
+            <EditText
+                android:id="@+id/tvAttendanceCNNResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="numberDecimal|numberSigned"
+                android:minHeight="48dp"
+                android:text="Your position(CNN):"
+                android:textAlignment="center" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSCNNX"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="X:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultCNNX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvSCNNY"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Y:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultCNNY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned" />
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btMapCNN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Your Location" />
+
+            <EditText
+                android:id="@+id/tvAttendanceSFResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="numberDecimal|numberSigned"
+                android:minHeight="48dp"
+                android:text="Your position(RF):"
+                android:textAlignment="center" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSSFX"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="X:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultSFX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/tvSSFY"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Y:"
+                    android:textAlignment="textEnd" />
+
+                <EditText
+                    android:id="@+id/tvSResultSFY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="numberDecimal|numberSigned" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/tvTimeMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="numberDecimal|numberSigned"
+                android:minHeight="48dp"
+                android:text=""
+                android:textAlignment="center" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btMapCNN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Your Location" />
-
-        <EditText
-            android:id="@+id/tvTimeMsg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="numberDecimal|numberSigned"
-            android:minHeight="48dp"
-            android:text=""
-            android:textAlignment="center" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone" />
-
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

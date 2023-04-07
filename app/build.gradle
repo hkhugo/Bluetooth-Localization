@@ -67,4 +67,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.11.0'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.11.0'
     implementation 'org.tensorflow:tensorflow-lite-support:0.4.3'
+
+    //RESTful API
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 }

@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:exported="true" >
+        android:exported="true"
+        android:usesCleartextTraffic="true">
         <activity
             android:name="com.estimote.proximity.MainActivity"
             android:exported="true"

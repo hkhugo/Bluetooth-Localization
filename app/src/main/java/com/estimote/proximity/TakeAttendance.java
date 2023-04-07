@@ -30,18 +30,26 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class TakeAttendance extends AppCompatActivity {
+public class TakeAttendance extends AppCompatActivity implements PredictionListener {
     private BeaconManager beaconManager;
     private BeaconRegion regionBlueberry, regionMint, regionCoconut, regionIce;
     private Trilateration trilateration;
     double[] position = new double[2];
 
+    PredictionListener predictionListener = null;
+
     String tag = "login";
+
+    EditText tvSResultSFX = null;
+    EditText tvSResultSFY = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        predictionListener = this;
 
         //setting beacon
         beaconManager = new BeaconManager(this);
@@ -50,8 +58,6 @@ public class TakeAttendance extends AppCompatActivity {
 
         EditText nameInput = findViewById(R.id.name_input);
         Button calculateButton = findViewById(R.id.calculate_button);
-//        Button bt4Beacon = findViewById(R.id.bt4Beacon);
-//        Button btCNN = findViewById(R.id.btCNN);
         TextView tvNameMsg = findViewById(R.id.tvNameMsg);
         TextView tvSResultX = findViewById(R.id.tvSResultX);
         TextView tvSResultY = findViewById(R.id.tvSResultY);
@@ -63,6 +69,8 @@ public class TakeAttendance extends AppCompatActivity {
         Button btMap = findViewById(R.id.btMap);
         Button btMap4B = findViewById(R.id.btMap4B);
         Button btMapCNN = findViewById(R.id.btMapCNN);
+        tvSResultSFX = findViewById(R.id.tvSResultSFX);
+        tvSResultSFY = findViewById(R.id.tvSResultSFY);
 
         double[] x = new double[4];
         x[0] = 520;
@@ -245,6 +253,13 @@ public class TakeAttendance extends AppCompatActivity {
                             tvSResultCNNX.setText(Double.toString(position[0]));
                             tvSResultCNNY.setText(Double.toString(position[1]));
 
+                            Log.e("Testing logout bt", "ClickLogout");
+                            RF rf = new RF(predictionListener, rssi);
+                            rf.execute();
+
+                            Log.e("Location", "Location result(CNN with 3 beacon RSSI): " + position[0] + ", " + position[1]);
+
+
                             // Update UI with the result
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -309,5 +324,15 @@ public class TakeAttendance extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @Override
+    public void onPredictionReceived(double[] position) {
+        Log.e("RF", "rf123: " + position[0] + " " + position[1]);
+
+
+        tvSResultSFX.setText("" + position[0]);
+        tvSResultSFY.setText("" + position[1]);
+
     }
 }
