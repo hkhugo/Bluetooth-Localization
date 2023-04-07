@@ -34,7 +34,7 @@ import com.estimote.proximity.tensorFlowLite.BeaconLocalizer;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PredictionListener {
     DrawerLayout drawerLayout;
     TextView navigationTV;
 
@@ -44,15 +44,27 @@ public class MainActivity extends AppCompatActivity {
     private int beaconNumber = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int NEARBY_DEVICES = 2;
+    TextView tvResultX;
+    TextView tvResultY;
+
+    PredictionListener predictionListener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         beaconManager = new BeaconManager(getApplicationContext());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
+        predictionListener = this;
+
+        tvResultX = findViewById(R.id.tvResultX);
+        tvResultY = findViewById(R.id.tvResultY);
+
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
@@ -144,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
         EditText ptTx2 = findViewById(R.id.ptTx2);
         EditText ptTx3 = findViewById(R.id.ptTx3);
         EditText ptTx4 = findViewById(R.id.ptTx4);
-        TextView tvResultX = findViewById(R.id.tvResultX);
-        TextView tvResultY = findViewById(R.id.tvResultY);
+        tvResultX = findViewById(R.id.tvResultX);
+        tvResultY = findViewById(R.id.tvResultY);
 
         double[] txPower;
         double[] result = new double[2];
@@ -238,6 +250,17 @@ public class MainActivity extends AppCompatActivity {
                 tvResultY.setText(Double.toString(result[1]));
                 break;
 
+            case R.id.btRF:
+                beaconNumber = 4;
+                rssi = new double[4];
+                rssi[0] = Double.parseDouble(ptRssi1.getText().toString());
+                rssi[1] = Double.parseDouble(ptRSSI2.getText().toString());
+                rssi[2] = Double.parseDouble(ptRSSI3.getText().toString());
+                rssi[3] = Double.parseDouble(ptRSSI4.getText().toString());
+                RF rf = new RF(predictionListener, rssi);
+                rf.execute();
+                break;
+
             case R.id.btShowmap:
                 Log.i(TAG, "clicked map now");
                 if (result != null) {
@@ -326,4 +349,11 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.disconnect();
     }
 
+    @Override
+    public void onPredictionReceived(double[] position) {
+        Log.e("Location", "Location result(RF with 4 beacon RSSI): " + position[0] + " " + position[1]);
+        tvResultX.setText("" + position[0]);
+        tvResultY.setText("" + position[1]);
+
+    }
 }
