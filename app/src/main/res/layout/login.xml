@@ -33,8 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
+<!--            android:visibility="gone">-->
 
             <EditText
                 android:id="@+id/tvNameMsg"
@@ -294,7 +294,13 @@
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="numberDecimal|numberSigned" />
+
             </LinearLayout>
+            <Button
+                android:id="@+id/btMapRF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Your Location" />
 
 
             <EditText

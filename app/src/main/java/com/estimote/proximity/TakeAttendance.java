@@ -43,7 +43,6 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
     EditText tvSResultSFX = null;
     EditText tvSResultSFY = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +68,7 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
         Button btMap = findViewById(R.id.btMap);
         Button btMap4B = findViewById(R.id.btMap4B);
         Button btMapCNN = findViewById(R.id.btMapCNN);
+        Button btMapRF = findViewById(R.id.btMapRF);
         tvSResultSFX = findViewById(R.id.tvSResultSFX);
         tvSResultSFY = findViewById(R.id.tvSResultSFY);
 
@@ -257,7 +257,6 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
                             RF rf = new RF(predictionListener, rssi);
                             rf.execute();
 
-                            Log.e("Location", "Location result(CNN with 3 beacon RSSI): " + position[0] + ", " + position[1]);
 
 
                             // Update UI with the result
@@ -324,13 +323,25 @@ public class TakeAttendance extends AppCompatActivity implements PredictionListe
                 startActivityForResult(intent, 1);
             }
         });
+
+        btMapRF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Map.class);
+                position[0] = Double.parseDouble(tvSResultSFX.getText().toString());
+                position[1] = Double.parseDouble(tvSResultSFY.getText().toString());
+                intent.putExtra("result", position);
+                intent.putExtra("x", x);
+                intent.putExtra("y", y);
+                intent.putExtra("test", 2);
+                startActivityForResult(intent, 2);
+            }
+        });
     }
 
     @Override
     public void onPredictionReceived(double[] position) {
-        Log.e("RF", "rf123: " + position[0] + " " + position[1]);
-
-
+        Log.e("Location", "Location result(RF with 4 beacon RSSI): " + position[0] + " " + position[1]);
         tvSResultSFX.setText("" + position[0]);
         tvSResultSFY.setText("" + position[1]);
 
